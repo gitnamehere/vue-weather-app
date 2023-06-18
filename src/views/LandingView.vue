@@ -1,17 +1,56 @@
 <script setup lang="ts">
-import axios from 'axios'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { ref } from 'vue';
+import axios from 'axios';
+
+const API_URL = "https://api.open-meteo.com/v1/";
+const GEOCODING_API_URL = "https://geocoding-api.open-meteo.com/v1/";
+
+const location = ref("");
+const longitude = ref();
+const latitude = ref();
+const temperature_unit = ref("fahrenheit");
+const weather = ref(); // This will be a JSON object based on the API's current_weather response, or error
+
+const getWeather = async () => {
+    axios
+        .get(`${GEOCODING_API_URL}search?name=${location.value}&count=1&language=en&format=json`)
+        .then((res) => {
+            console.log(res);
+            longitude.value = res.data.results[0].longitude;
+            latitude.value = res.data.results[0].latitude;
+            getWeatherData();
+        })
+        .catch((err) => {
+            console.log(err);
+            weather.value = "Error: Location not found."
+        });
+
+    const getWeatherData = () => {
+        axios
+            .get(`${API_URL}forecast?latitude=${latitude.value}&longitude=${longitude.value}&current_weather=true&temperature_unit=${temperature_unit.value}`)
+            .then((res) => {
+                console.log(res);
+                weather.value = res.data.current_weather
+            })
+            .catch((err) => {
+                console.log(err);
+                weather.value = "Error: Weather Data Error."
+            });
+    };
+}
+
 </script>
 
 <template>
     <main>
         <h1>A Vue Weather App</h1>
-        <form class="searchbar">
-            <input type="text" placeholder="Enter your city" />
-            <button type="submit">
+        <div class="searchbar">
+            <input v-model="location" placeholder="Enter a city or zip code" />
+            <button @click="getWeather">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" style="color: #242;" size="xl" />
             </button>
-        </form>
+        </div>
+        <text> {{ weather }} </text>
   </main>
 </template>
 
@@ -19,6 +58,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
     h1 {
     font-weight: 500;
     font-size: 2.6rem;
+    text-align: center;
     }
 
     .searchbar {
@@ -29,6 +69,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
     font-size: 1.2rem;
     padding-left: 5%;
     height: 3rem;
+    width: 100%;
     justify-content: center;
     align-items: center;
     }
@@ -48,7 +89,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
     border: none;
     height: 100%;
     width: 10%;
-    margin-top: 0;
+    margin-top: -5px;
     padding-top: 0%;
     }
 
