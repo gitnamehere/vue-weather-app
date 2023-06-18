@@ -1,71 +1,57 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 import Searchbar from '@/components/Searchbar.vue';
 
 const weatherStore = useWeatherStore();
 
-const { weather } = storeToRefs(weatherStore);
+const { weather, geocoding } = storeToRefs(weatherStore);
 
 weatherStore.$subscribe(() => {
+    geocoding.value = weatherStore.geocoding;
     weather.value = weatherStore.weather;
 });
 
 </script>
 
 <template>
-    <h1>A Vue Weather App</h1>
-    <Searchbar />
-    <div class="weatherApiLink">
-        <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
+    <div class="container">
+        <h1>A Vue Weather App</h1>
+        <div class="searchBar">
+            <Searchbar />
+        </div>
+        <div class="weatherApiLink">
+            <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
+        </div>
     </div>
-    <text> {{ weather }} </text>
 </template>
 
 <style scoped>
-    h1 {
-    font-weight: 500;
-    font-size: 2.6rem;
-    text-align: center;
-    }
-
-    .searchbar {
+    .container {
+    width: auto;
     display: flex;
-    margin-top: 1rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 100px;
-    font-size: 1.2rem;
-    padding-left: 5%;
-    height: 3rem;
-    width: 100%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     }
 
-    .searchbar input {
-    border-radius: 100px;
-    border: none;
-    outline: none;
-    font-size: 1.2rem;
-    height: 100%;
-    width: 89%;
-    }
-
-    .searchbar button {
-    border-radius: 100px;
-    background-color: transparent;
-    border: none;
-    height: 100%;
-    width: 10%;
-    margin: auto;
-
+    h1 {
+    font-weight: 500;
+    font-size: 2.6rem;
+    text-align: center;
+    margin-top: -5rem;
     }
 
     .weatherApiLink {
     font-size: 0.8rem;
     text-align: center;
     margin-top: 1rem;
+    }
+
+    .searchBar {
+    margin-top: 1rem;
+    width: 70%;
     }
 
 </style>

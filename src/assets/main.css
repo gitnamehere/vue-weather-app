@@ -3,7 +3,7 @@
 #app {
   margin: 0 auto;
   padding: 1rem;
-
+  width: 90%;
   font-weight: normal;
 }
 
@@ -21,9 +21,6 @@ a,
 }
 
 @media (min-width: 768px) {
-  #app {
-    width: 50%;
-  }
 
   body {
     display: flex;
