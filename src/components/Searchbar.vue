@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
+import router from '@/router';
 const weatherStore = useWeatherStore();
 
 const location = ref('');
@@ -9,13 +10,14 @@ const location = ref('');
 const getWeather = () => {
     weatherStore.setLocation(location.value);
     weatherStore.getWeather();
+    router.push('/weather');
 };
 
 </script>
 
 <template>
     <div class="searchbar">
-        <input v-model="location" placeholder="Enter a city or zip code" />
+        <input v-model="location" placeholder="Enter a city or zip code" @keyup.enter="getWeather"/>
         <button @click="getWeather">
             <font-awesome-icon :icon="['fas', 'magnifying-glass']" style="color: #282;" size="xl" />
         </button>
@@ -31,12 +33,11 @@ const getWeather = () => {
 
     .searchbar {
     display: flex;
-    margin-top: 1rem;
     border: 1px solid #ccc;
     background-color: #fff;
     border-radius: 100px;
     font-size: 1.2rem;
-    padding-left: 5%;
+    padding: 10px;
     height: 3rem;
     width: 100%;
     justify-content: center;
@@ -57,8 +58,8 @@ const getWeather = () => {
     background-color: transparent;
     border: none;
     height: 100%;
-    width: 10%;
+    width: auto;
     margin: auto;
-
+    margin-right: 0;
     }
 </style>

@@ -11,6 +11,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const longitude = ref();
   const latitude = ref();
   const temperature_unit = ref("fahrenheit");
+  const geocoding = ref(); // This will be a JSON object based on the API's geocoding response, or error
   const weather = ref(); // This will be a JSON object based on the API's current_weather response, or error
 
   const setLocation = (locationSearch: string) => {
@@ -18,13 +19,13 @@ export const useWeatherStore = defineStore('weather', () => {
   };
 
   const getWeather = async () => {
-
     axios
       .get(`${GEOCODING_API_URL}search?name=${location.value}&count=1&language=en&format=json`)
       .then((res) => {
         console.log(res);
         longitude.value = res.data.results[0].longitude;
         latitude.value = res.data.results[0].latitude;
+        geocoding.value = res.data.results[0];
         getWeatherData();
       })
       .catch((err) => {
@@ -46,5 +47,5 @@ export const useWeatherStore = defineStore('weather', () => {
     };
   }
 
-  return { location, longitude, latitude, temperature_unit, weather, getWeather, setLocation }
+  return { location, longitude, latitude, temperature_unit, weather, geocoding, getWeather, setLocation }
 })
