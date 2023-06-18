@@ -20,7 +20,11 @@ a,
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 768px) {
+  #app {
+    width: 50%;
+  }
+
   body {
     display: flex;
     place-items: center;

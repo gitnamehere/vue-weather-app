@@ -1,25 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
-import Searchbar from '@/components/Searchbar.vue';
-
 const weatherStore = useWeatherStore();
 
-const { weather } = storeToRefs(weatherStore);
+const location = ref('');
 
-weatherStore.$subscribe(() => {
-    weather.value = weatherStore.weather;
-});
+const getWeather = () => {
+    weatherStore.setLocation(location.value);
+    weatherStore.getWeather();
+};
 
 </script>
 
 <template>
-    <h1>A Vue Weather App</h1>
-    <Searchbar />
-    <div class="weatherApiLink">
-        <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
+    <div class="searchbar">
+        <input v-model="location" placeholder="Enter a city or zip code" />
+        <button @click="getWeather">
+            <font-awesome-icon :icon="['fas', 'magnifying-glass']" style="color: #282;" size="xl" />
+        </button>
     </div>
-    <text> {{ weather }} </text>
 </template>
 
 <style scoped>
@@ -61,11 +61,4 @@ weatherStore.$subscribe(() => {
     margin: auto;
 
     }
-
-    .weatherApiLink {
-    font-size: 0.8rem;
-    text-align: center;
-    margin-top: 1rem;
-    }
-
 </style>
