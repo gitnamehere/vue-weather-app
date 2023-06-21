@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
-import Searchbar from '@/components/Searchbar.vue';
+import Searchbar from '@/components/LocationSearchbar.vue';
 
 const weatherStore = useWeatherStore();
 
