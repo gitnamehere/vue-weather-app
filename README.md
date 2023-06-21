@@ -1,5 +1,25 @@
 # VueWeatherApp
 
+A short project to learn Vue.js.
+
+## Getting started
+
+This project requires Node.js and yarn (package manager)
+
+To install all the packages and dependencies, run the following commands in the terminal in the root project directory:
+
+```sh 
+yarn
+```
+
+Then to start the dev server:
+
+```sh 
+yarn build dev
+```
+
+---
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
