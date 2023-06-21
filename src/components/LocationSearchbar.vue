@@ -32,33 +32,37 @@ const getWeather = () => {
 
     .searchbar {
     display: flex;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 16px;
-    font-size: 1.2rem;
-    padding: 10px;
+    align-items: center;
+    justify-content: center;
+
     height: 3rem;
     width: 100%;
-    justify-content: center;
-    align-items: center;
+    padding: 10px;
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+
+    font-size: 1.2rem;
     }
 
     .searchbar input {
-    border-radius: 100px;
-    border: none;
-    outline: none;
-    font-size: 1.2rem;
     height: 100%;
     width: 89%;
+
+    border: none;
+
+    font-size: 1.2rem;
     }
 
     .searchbar button {
-    border-radius: 100px;
-    background-color: transparent;
-    border: none;
-    height: 100%;
     width: auto;
+    height: 100%;
     margin: auto;
     margin-right: 0;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 100px;
     }
 </style>
