@@ -7,11 +7,6 @@ const weatherStore = useWeatherStore();
 
 const { weather, geocoding } = storeToRefs(weatherStore);
 
-weatherStore.$subscribe(() => {
-    geocoding.value = weatherStore.geocoding;
-    weather.value = weatherStore.weather;
-});
-
 </script>
 
 <template>
