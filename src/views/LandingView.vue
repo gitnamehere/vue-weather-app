@@ -16,6 +16,7 @@ weatherStore.$subscribe(() => {
 </script>
 
 <template>
+    <div class="background" ></div>
     <div class="container">
         <h1>A Vue Weather App</h1>
         <div class="searchBar">
@@ -29,11 +30,13 @@ weatherStore.$subscribe(() => {
 
 <style scoped>
     .container {
-    width: auto;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
     }
 
     h1 {
@@ -51,7 +54,16 @@ weatherStore.$subscribe(() => {
 
     .searchBar {
     margin-top: 1rem;
-    width: 70%;
+    width: 60%;
     }
 
+    .background {
+    position: absolute;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    }
 </style>
