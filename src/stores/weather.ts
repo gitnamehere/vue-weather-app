@@ -35,7 +35,7 @@ export const useWeatherStore = defineStore('weather', () => {
 
   const getWeatherData = () => {
     axios
-      .get(`${API_URL}forecast?latitude=${latitude.value}&longitude=${longitude.value}&current_weather=true&temperature_unit=${temperature_unit.value}`)
+      .get(`${API_URL}forecast?latitude=${latitude.value}&longitude=${longitude.value}&current_weather=true&temperature_unit=${temperature_unit.value}&windspeed_unit=mph&precipitation_unit=inch`)
       .then((res) => {
           console.log(res);
           weather.value = res.data.current_weather
