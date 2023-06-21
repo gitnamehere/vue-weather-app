@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 import router from '@/router';
 const weatherStore = useWeatherStore();
