@@ -21,7 +21,7 @@ weatherStore.$subscribe(() => {
     </Transition>
     <div class="container">
         <div class="top-bar">
-            <a href="/" style="color: #1c1c1c;">
+            <a href="/">
                 <h1>A Vue Weather App</h1>
             </a>
             <div class="top-bar-search">
