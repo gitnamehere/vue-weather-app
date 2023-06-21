@@ -35,7 +35,7 @@ const getWeather = () => {
     display: flex;
     border: 1px solid #ccc;
     background-color: #fff;
-    border-radius: 100px;
+    border-radius: 16px;
     font-size: 1.2rem;
     padding: 10px;
     height: 3rem;
