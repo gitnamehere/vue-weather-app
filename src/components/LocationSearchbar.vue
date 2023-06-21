@@ -52,6 +52,7 @@ const getWeather = () => {
 
     border: none;
 
+    outline: none;
     font-size: 1.2rem;
     }
 
