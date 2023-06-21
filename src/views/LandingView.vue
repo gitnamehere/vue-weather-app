@@ -30,26 +30,28 @@ weatherStore.$subscribe(() => {
 
 <style scoped>
     .container {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    width: 100vw;
+    height: 100vh;
     margin: auto;
     }
 
     h1 {
+    margin-top: -5rem;
+
     font-weight: 500;
     font-size: 2.6rem;
     text-align: center;
-    margin-top: -5rem;
     }
 
     .weatherApiLink {
+    margin-top: 1rem;
     font-size: 0.8rem;
     text-align: center;
-    margin-top: 1rem;
     }
 
     .searchBar {
@@ -59,11 +61,13 @@ weatherStore.$subscribe(() => {
 
     .background {
     position: absolute;
-    background-color: transparent;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     left: 0;
     z-index: -1;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: transparent;
     }
 </style>
