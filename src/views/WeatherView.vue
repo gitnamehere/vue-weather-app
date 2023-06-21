@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
+import parseWeatherCode from '../utils/weatherCodes';
 import Searchbar from '@/components/Searchbar.vue';
 
 const weatherStore = useWeatherStore();
@@ -21,11 +22,11 @@ weatherStore.$subscribe(() => {
         <div class="background" ></div>
     </Transition>
     <div class="container">
-        <div class="topBar">
+        <div class="top-bar">
             <a href="/" style="color: #1c1c1c;">
                 <h1>A Vue Weather App</h1>
             </a>
-            <div class="searchBarTop">
+            <div class="top-bar-search">
                 <Searchbar />
             </div>
         </div>
@@ -34,9 +35,17 @@ weatherStore.$subscribe(() => {
                 <h1 v-if="geocoding">{{geocoding.name}}, {{geocoding.admin1}}</h1>
                 <h2 v-if="weather">{{geocoding.country}}</h2>
             </div>
-            <text v-if="weather">Temperature: {{weather.temperature}}°F</text>
+            <div v-if="weather" class="current-weather-container">
+                <div class="current-conditions-container">
+                    <text>insert image here</text>
+                    <text class="current-conditions">{{parseWeatherCode(weather.weathercode)}}</text>
+                </div>
+                <div class="current-temperature-container">
+                    <h2 class="current-temperature">{{weather.temperature}}</h2>
+                    <text class="current-temperature-unit">°F</text>
+                </div>
+            </div>
             <text v-if="weather">Windspeed: {{weather.windspeed}}mph @ {{weather.winddirection}}° (compass directions coming soon!)</text>
-            <text v-if="weather">Conditions: {{weather.weathercode}} (This is a WMO weather interpretation code, check what it means in open-meteo's api docs. English interpretation coming soon)</text>
             <text v-if="weather">
                 <text v-if="weather.is_day">It is currently day.</text>
                 <text v-else>It is currently night.</text>
@@ -55,84 +64,147 @@ weatherStore.$subscribe(() => {
 
 <style scoped>
     .container {
-        color: #f8f8f8;
-        left: 0%;
-        top: 0%;
-        height: 100vh;
-        width: auto;
         align-items: center;
         justify-content: center;
+
+        height: 100vh;
+        width: auto;
+
+        color: #f8f8f8;
     }
-    .topBar {
-        animation: fadein 0.5s;
-        box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
-        background: #0f406e;
+
+    .top-bar {
         display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
         width: 100vw;
         padding: 1rem 5rem;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
         margin-bottom: 1rem;
+
+        background: #0f406e;
+        box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
+
+        animation: fadein 0.5s;
     }
 
     @media (max-width: 767px) {
 
-        .topBar {
+        .top-bar {
             padding: 1rem;
         }
-        .topBar h1 {
+        .top-bar h1 {
         display: none;
         font-weight: 500;
         font-size: 1.5vw;
         color: #f8f8f8;
         }
 
-        .searchBarTop {
+        .top-bar-search {
         display: flex;
         width: 100%;
         }
     }
 
     @media (min-width: 768px) {
-        .topBar h1 {
+        .top-bar h1 {
         font-weight: 500;
         font-size: 1.5vw;
         color: #f8f8f8;
         }
 
-        .searchBarTop {
+        .top-bar-search {
         display: flex;
         width: 80%;
         }
     }
 
     .body {
-        height: auto;
         display: flex;
-        padding: 0 2%;
         flex-direction: column;
         align-items: center;
         justify-content: start;
+
+        height: auto;
+        padding: 0 2%;
     }
 
     .location {
-        margin: 1rem auto;
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        margin: 1rem auto;
     }
 
-    .footer {
-        position: fixed;
+    .current-weather-container {
         display: flex;
-        flex-direction: column;
-        left: 0;
-        width: 100vw;
         align-items: center;
         justify-content: center;
+        height: 10rem;
+        width: 70%;
+        margin: 1rem auto;
+
+    }
+
+    .current-conditions-img {
+        height: 100%;
+        width: auto;
+        margin-right: 1rem;
+    }
+
+    .current-conditions-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+        padding: 1rem;
+        margin-right: 1rem;
+
+    }
+
+    .current-conditions {
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 2rem;
+    }
+
+    .current-temperature-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+
+
+    }
+
+    .current-temperature {
+        font-size: 5rem;
+        font-weight: 500;
+        line-height: 5rem;
+    }
+    .current-temperature-unit {
+        margin-top: -1.7rem;
+        font-size: 2rem;
+        font-weight: 200;
+    }
+    .footer {
+        position: fixed;
+        left: 0;
         bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100vw;
         margin-bottom: 2rem;
+
         text-align: center;
     }
 
@@ -141,14 +213,17 @@ weatherStore.$subscribe(() => {
         to   { opacity: 1; }
     }
 
+    /* Day: 2885dd */
+    /* Night: 111128 */
     .background {
     position: absolute;
-    background-color: #2885dd;
-    animation: fadein 0.5s;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     left: 0;
     z-index: -1;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #2885dd;
+    animation: fadein 0.5s;
     }
 </style>
