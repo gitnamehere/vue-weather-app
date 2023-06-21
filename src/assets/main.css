@@ -2,8 +2,6 @@
 
 #app {
   margin: 0 auto;
-  padding: 1rem;
-  width: 90%;
   font-weight: normal;
 }
 
@@ -24,7 +22,6 @@ a,
 
   body {
     display: flex;
-    place-items: center;
   }
 
   .searchbar {
