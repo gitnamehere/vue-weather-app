@@ -30,8 +30,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
             </div>
             <div v-if="weather" class="current-weather-container">
                 <div class="current-conditions-container">
-                    <text>insert image here</text>
-                    <text class="current-conditions">{{parseWeatherCode(weather.weathercode)}}</text>
+                    <text>insert icon here</text>
+                    <text class="current-conditions">{{parseWeatherCode({ code: weather.weathercode, isDay: weather.is_day })}}</text>
                 </div>
                 <div class="current-temperature-container">
                     <h2 class="current-temperature">{{weather.temperature}}</h2>

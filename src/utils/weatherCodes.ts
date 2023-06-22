@@ -1,10 +1,14 @@
-// Supports day only, based on open-meteo.com/en/docs
-const parseWeatherCode = (code: number) => {
+interface WeatherCode {
+    code: number;
+    isDay: number;
+} 
+
+const parseWeatherCode = ({code, isDay}: WeatherCode) => {
     switch (code) {
         case 0:
-            return 'Clear';
+            return isDay ? 'Sunny' : 'Clear';
         case 1:
-            return 'Mainly Clear';
+            return isDay ? 'Mostly Sunny' : 'Mostly Clear';
         case 2:
             return 'Partly Cloudy';
         case 3:
