@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useWeatherStore } from '@/stores/weather';
 import Searchbar from '@/components/LocationSearchbar.vue';
-
-const weatherStore = useWeatherStore();
-
-const { weather, geocoding } = storeToRefs(weatherStore);
-
 </script>
 
 <template>
