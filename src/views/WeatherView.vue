@@ -8,11 +8,6 @@ const weatherStore = useWeatherStore();
 
 const { weather, geocoding } = storeToRefs(weatherStore);
 
-weatherStore.$subscribe(() => {
-    geocoding.value = weatherStore.geocoding;
-    weather.value = weatherStore.weather;
-});
-
 </script>
 
 <template>
@@ -87,33 +82,29 @@ weatherStore.$subscribe(() => {
         animation: fadein 0.5s;
     }
 
-    @media (max-width: 767px) {
 
-        .top-bar {
-            padding: 1rem;
-        }
-        .top-bar h1 {
-        display: none;
+    .top-bar h1 {
         font-weight: 500;
         font-size: 1.5vw;
         color: #f8f8f8;
+    }
+
+    @media (max-width: 767px) {
+        .top-bar {
+            padding: 1rem;
+        }
+
+        .top-bar h1 {
+        display: none;
         }
 
         .top-bar-search {
-        display: flex;
         width: 100%;
         }
     }
 
     @media (min-width: 768px) {
-        .top-bar h1 {
-        font-weight: 500;
-        font-size: 1.5vw;
-        color: #f8f8f8;
-        }
-
         .top-bar-search {
-        display: flex;
         width: 80%;
         }
     }
@@ -143,7 +134,6 @@ weatherStore.$subscribe(() => {
         height: 10rem;
         width: 70%;
         margin: 1rem auto;
-
     }
 
     .current-conditions-img {
@@ -165,7 +155,7 @@ weatherStore.$subscribe(() => {
     }
 
     .current-conditions {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 500;
         line-height: 2rem;
     }
@@ -177,8 +167,6 @@ weatherStore.$subscribe(() => {
         justify-content: center;
 
         height: 100%;
-
-
     }
 
     .current-temperature {
