@@ -73,6 +73,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         width: auto;
 
         color: #f8f8f8;
+        text-shadow:  0px 2px 8px #0004;
     }
 
     .top-bar {
@@ -90,7 +91,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 
         animation: fadein 0.5s;
     }
-
 
     .top-bar h1 {
         font-weight: 500;
