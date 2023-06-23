@@ -24,29 +24,30 @@ const { weather, geocoding } = storeToRefs(weatherStore);
             </div>
         </div>
         <div class="body">
-            <div class="location">
-                <h1 v-if="geocoding">{{geocoding.name}}, {{geocoding.admin1}}</h1>
-                <h2 v-if="weather">{{geocoding.country}}</h2>
+            <div v-if="geocoding" class="location">
+                <h1>{{geocoding.name}}, {{geocoding.admin1}}</h1>
+                <h2>{{geocoding.country}}</h2>
             </div>
             <div v-if="weather" class="current-weather-container">
                 <div class="current-conditions-container">
                     <text>insert icon here</text>
-                    <text class="current-conditions">{{parseWeatherCode({ code: weather.weathercode, isDay: weather.is_day })}}</text>
+                    <text class="current-conditions">{{parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day })}}</text>
                 </div>
                 <div class="current-temperature-container">
-                    <h2 class="current-temperature">{{weather.temperature}}</h2>
+                    <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
+                    <text class="current-temperature-unit">°F</text>
+                </div>
+                <div class="current-temperature-container">
+                    <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
                     <text class="current-temperature-unit">°F</text>
                 </div>
             </div>
-            <text v-if="weather">Windspeed: {{weather.windspeed}}mph @ {{weather.winddirection}}° (compass directions coming soon!)</text>
+            <!--Unfinished stuff-->
+            <text v-if="weather">Windspeed: {{weather.current_weather.windspeed}}mph @ {{weather.current_weather.winddirection}}° (compass directions coming soon!)</text>
             <text v-if="weather">
-                <text v-if="weather.is_day">It is currently day.</text>
+                <text v-if="weather.current_weather.is_day">It is currently day.</text>
                 <text v-else>It is currently night.</text>
             </text>
-            <text v-if="weather">Weather Data (debug)</text>
-            <div>
-                <text> {{ weather }} </text>
-            </div>  
         </div>
         <footer class="footer">
             <text>This is the weather page. (under development)</text>

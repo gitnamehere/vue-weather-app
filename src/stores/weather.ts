@@ -30,7 +30,7 @@ export const useWeatherStore = defineStore('weather', () => {
       })
       .catch((err) => {
         console.log(err);
-        weather.value = "Error: Location not found."
+        geocoding.value = "Error: Location not found."
       });
 
   const getWeatherData = () => {
@@ -39,20 +39,21 @@ export const useWeatherStore = defineStore('weather', () => {
       `?latitude=${latitude.value}` +
       `&longitude=${longitude.value}` +
       `&current_weather=true` +
+      `&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset` +
       `&temperature_unit=${temperature_unit.value}` +
       `&windspeed_unit=mph` + 
       `&precipitation_unit=inch` +
-      '&timezone=auto';
+      `&timezone=auto`;
 
     axios
       .get(requestUrl)
       .then((res) => {
           console.log(res);
-          weather.value = res.data.current_weather
+          weather.value = res.data;
       })
       .catch((err) => {
           console.log(err);
-          weather.value = "Error: Weather Data Error."
+          weather.value = "Error: Weather Data Error.";
       });
     };
   }
