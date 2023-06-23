@@ -10,6 +10,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 
 </script>
 
+<!--TODO: refactor code into seperate components-->
+
 <template>
     <Transition>
         <div class="background" ></div>
@@ -35,11 +37,17 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                 </div>
                 <div class="current-temperature-container">
                     <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
-                    <text class="current-temperature-unit">°F</text>
+                    <text class="current-temperature-unit">{{weather.daily_units.temperature_2m_min}}</text>
                 </div>
-                <div class="current-temperature-container">
-                    <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
-                    <text class="current-temperature-unit">°F</text>
+                <div v-if="weather.daily" class="min-max-temperature-container">
+                    <div>
+                        <text class="min-max-temperature">H: {{weather.daily.temperature_2m_max[0]}}</text>
+                        <text class="min-max-temperature">{{weather.daily_units.temperature_2m_max}}</text>
+                    </div>
+                    <div>
+                        <text class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</text>
+                        <text class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</text>
+                    </div>
                 </div>
             </div>
             <!--Unfinished stuff-->
@@ -90,26 +98,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         color: #f8f8f8;
     }
 
-    @media (max-width: 767px) {
-        .top-bar {
-            padding: 1rem;
-        }
-
-        .top-bar h1 {
-        display: none;
-        }
-
-        .top-bar-search {
-        width: 100%;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .top-bar-search {
-        width: 80%;
-        }
-    }
-
     .body {
         display: flex;
         flex-direction: column;
@@ -132,15 +120,15 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         display: flex;
         align-items: center;
         justify-content: center;
+
         height: 10rem;
-        width: 70%;
+        width: 80%;
         margin: 1rem auto;
     }
 
     .current-conditions-img {
         height: 100%;
         width: auto;
-        margin-right: 1rem;
     }
 
     .current-conditions-container {
@@ -150,8 +138,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         justify-content: center;
 
         height: 100%;
-        padding: 1rem;
-        margin-right: 1rem;
+        padding: 1rem 0;
 
     }
 
@@ -168,6 +155,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         justify-content: center;
 
         height: 100%;
+        width: 15rem;
+        margin: 2rem;
     }
 
     .current-temperature {
@@ -180,6 +169,20 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         font-size: 2rem;
         font-weight: 200;
     }
+
+    .min-max-temperature-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        height: 60%;
+    }
+
+    .min-max-temperature {
+        font-weight: 500;
+    }
+
     .footer {
         position: fixed;
         left: 0;
@@ -193,6 +196,44 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         margin-bottom: 2rem;
 
         text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .top-bar {
+            padding: 1rem;
+        }
+
+        .top-bar h1 {
+        display: none;
+        }
+
+        .top-bar-search {
+        width: 100%;
+        }
+
+        .current-weather-container {
+            flex-direction: column;
+            margin: 2rem;
+        }
+
+        .current-temperature-container {
+            margin: 0;
+        }
+
+        .min-max-temperature-container {
+            flex-direction: row;
+            margin-top: 1rem;
+        }
+        
+        .min-max-temperature:nth-child(even) {
+            margin-right: 1rem;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .top-bar-search {
+        width: 80%;
+        }
     }
 
     @keyframes fadein {
