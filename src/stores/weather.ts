@@ -34,8 +34,18 @@ export const useWeatherStore = defineStore('weather', () => {
       });
 
   const getWeatherData = () => {
+
+    const requestUrl = `${API_URL}forecast` + 
+      `?latitude=${latitude.value}` +
+      `&longitude=${longitude.value}` +
+      `&current_weather=true` +
+      `&temperature_unit=${temperature_unit.value}` +
+      `&windspeed_unit=mph` + 
+      `&precipitation_unit=inch` +
+      '&timezone=auto';
+
     axios
-      .get(`${API_URL}forecast?latitude=${latitude.value}&longitude=${longitude.value}&current_weather=true&temperature_unit=${temperature_unit.value}&windspeed_unit=mph&precipitation_unit=inch`)
+      .get(requestUrl)
       .then((res) => {
           console.log(res);
           weather.value = res.data.current_weather
