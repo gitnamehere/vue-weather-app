@@ -30,7 +30,8 @@ export const useWeatherStore = defineStore('weather', () => {
       })
       .catch((err) => {
         console.log(err);
-        geocoding.value = "Error: Location not found."
+        geocoding.value = null;
+        weather.value = null;
       });
 
   const getWeatherData = () => {
