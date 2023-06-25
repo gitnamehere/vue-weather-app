@@ -13,9 +13,12 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 <!--TODO: refactor code into seperate components-->
 
 <template>
-    <Transition>
-        <div class="background" ></div>
-    </Transition>
+    <!--Background-->
+    <div v-if="weather">
+        <div v-if="weather.current_weather.is_day" class="background day"></div>
+        <div v-else class="background night"></div>
+    </div>
+
     <div class="container">
         <div class="top-bar">
             <a href="/">
@@ -25,9 +28,10 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                 <Searchbar />
             </div>
         </div>
+
         <div class="body">
             <div v-if="geocoding" class="location">
-                <h1>{{geocoding.name}}, {{geocoding.admin1}}</h1>
+                <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
                 <h2>{{geocoding.country}}</h2>
             </div>
             <div v-if="weather" class="current-weather-container">
@@ -39,7 +43,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                     <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
                     <text class="current-temperature-unit">{{weather.daily_units.temperature_2m_min}}</text>
                 </div>
-                <div v-if="weather.daily" class="min-max-temperature-container">
+                <div v-if="weather.daily" class="weather-data-container">
                     <div>
                         <text class="min-max-temperature">H: {{weather.daily.temperature_2m_max[0]}}</text>
                         <text class="min-max-temperature">{{weather.daily_units.temperature_2m_max}}</text>
@@ -48,14 +52,11 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                         <text class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</text>
                         <text class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</text>
                     </div>
+                    <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph</text>
                 </div>
             </div>
             <!--Unfinished stuff-->
             <text v-if="weather">Windspeed: {{weather.current_weather.windspeed}}mph @ {{weather.current_weather.winddirection}}° (compass directions coming soon!)</text>
-            <text v-if="weather">
-                <text v-if="weather.current_weather.is_day">It is currently day.</text>
-                <text v-else>It is currently night.</text>
-            </text>
         </div>
         <footer class="footer">
             <text>This is the weather page. (under development)</text>
@@ -113,7 +114,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         flex-direction: column;
         align-items: center;
 
-        margin: 1rem auto;
+        margin: 1rem 0rem auto;
     }
 
     .current-weather-container {
@@ -123,7 +124,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 
         height: 10rem;
         width: 80%;
-        margin: 1rem auto;
     }
 
     .current-conditions-img {
@@ -138,6 +138,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         justify-content: center;
 
         height: 100%;
+        width: 15%;
         padding: 1rem 0;
 
     }
@@ -170,13 +171,14 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         font-weight: 200;
     }
 
-    .min-max-temperature-container {
+    .weather-data-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
         height: 60%;
+        width: 15%;
     }
 
     .min-max-temperature {
@@ -214,15 +216,24 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         .current-weather-container {
             flex-direction: column;
             margin: 2rem;
+
+
+            height: auto;
+        }
+
+        .current-conditions-container {
+            width: 95%;
         }
 
         .current-temperature-container {
             margin: 0;
         }
 
-        .min-max-temperature-container {
+        .weather-data-container {
             flex-direction: row;
             margin-top: 1rem;
+
+            width: 95%;
         }
         
         .min-max-temperature:nth-child(even) {
@@ -251,7 +262,15 @@ const { weather, geocoding } = storeToRefs(weatherStore);
     width: 100vw;
     height: 100vh;
 
-    background-color: #2885dd;
     animation: fadein 0.5s;
     }
+
+    .day {
+    background-color: #2885dd;
+    }
+
+    .night {
+    background-color: #111128;
+    }
+
 </style>
