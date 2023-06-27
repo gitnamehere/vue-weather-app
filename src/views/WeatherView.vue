@@ -36,8 +36,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
             </div>
             <div v-if="weather" class="current-weather-container">
                 <div class="current-conditions-container">
-                    <text>insert icon here</text>
-                    <text class="current-conditions">{{parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day })}}</text>
+                    <i class="current-conditions wi" :class="parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day }).icon"></i>
+                    <text class="current-conditions">{{ parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day }).description }}</text>
                 </div>
                 <div class="current-temperature-container">
                     <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
