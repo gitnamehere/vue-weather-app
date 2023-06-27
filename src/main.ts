@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './assets/weather-icons/css/weather-icons.min.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

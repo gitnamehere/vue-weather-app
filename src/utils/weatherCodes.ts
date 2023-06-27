@@ -3,66 +3,71 @@ interface WeatherCode {
     isDay: number;
 } 
 
-const parseWeatherCode = ({code, isDay}: WeatherCode) => {
+interface weatherConditions {
+    description: string;
+    icon?: string;
+}
+
+const parseWeatherCode = ({code, isDay}: WeatherCode): weatherConditions => {
     switch (code) {
         case 0:
-            return isDay ? 'Sunny' : 'Clear';
+            return isDay ? {description: 'Sunny', icon: 'wi-day-sunny'} : {description: 'Clear', icon: 'wi-night-clear'};
         case 1:
-            return isDay ? 'Mostly Sunny' : 'Mostly Clear';
+            return  isDay ? {description: 'Mostly Sunny', icon: 'wi-day-sunny-high'} : {description: 'Mostly Clear', icon: 'wi-night-alt-cloudy-high'};
         case 2:
-            return 'Partly Cloudy';
+            return {description: 'Partly Cloudy', icon: isDay? 'wi-night-partly-cloudy' : 'wi-night-alt-partly-cloudy'};
         case 3:
-            return 'Cloudy';
+            return {description: 'Cloudy', icon: 'wi-cloudy'};
         case 45:
-            return 'Fog';
+            return {description: 'Fog', icon: 'wi-fog'};
         case 48:
-            return 'Freezing Fog';
+            return {description: 'Freezing Fog', icon: 'wi-fog'};
         case 51:
-            return 'Light Drizzle';
+            return {description: 'Light Drizzle', icon: 'wi-sprinkle'};
         case 53:
-            return 'Drizzle';
+            return {description: 'Drizzle', icon: 'wi-sprinkle'};
         case 55:
-            return 'Heavy Drizzle';
+            return {description: 'Heavy Drizzle', icon: 'wi-sprinkle'};
         case 56:
-            return 'Light Freezing Drizzle';
+            return {description: 'Light Freezing Drizzle', icon: 'wi-rain-mix'};
         case 57:
-            return 'Freezing Drizzle';
+            return {description: 'Freezing Drizzle', icon: 'wi-rain-mix'};
         case 61:
-            return 'Light Rain';
+            return {description: 'Light Rain', icon: 'wi-raindrops'};
         case 63:
-            return 'Rain';
+            return {description: 'Rain', icon: 'wi-rain'};
         case 65:
-            return 'Heavy Rain';
+            return {description: 'Heavy Rain', icon: 'wi-rain-wind'};
         case 66:
-            return 'Light Freezing Rain';
+            return {description: 'Light Freezing Rain', icon: 'wi-rain-mix'};
         case 67:
-            return 'Freezing Rain';
+            return {description: 'Freezing Rain', icon: 'wi-rain-mix'};
         case 71:
-            return 'Light Snow';
+            return {description: 'Light Snow', icon: 'wi-snow'};
         case 73:
-            return 'Snow';
+            return {description: 'Snow', icon: 'wi-snow'};
         case 75:
-            return 'Heavy Snow';
+            return {description: 'Heavy Snow', icon: 'wi-snow-wind'};
         case 77:
-            return 'Snow Grains';
+            return {description: 'Snow Grains', icon: 'wi-snowflake-cold'};
         case 80:
-            return 'Light Showers';
+            return {description: 'Light Showers', icon: 'wi-showers'};
         case 81:
-            return 'Showers';
+            return {description: 'Showers', icon: 'wi-showers'};
         case 82:
-            return 'Heavy Showers';
+            return {description: 'Heavy Showers', icon: 'wi-showers'};
         case 85:
-            return 'Light Snow Showers';
+            return {description: 'Light Snow Showers', icon: 'wi-snow'};
         case 86:
-            return 'Snow Showers';
+            return {description: 'Snow Showers', icon: 'wi-snow'};
         case 95:
-            return 'Thunderstorms';
+            return {description: 'Thunderstorms', icon: 'wi-thunderstorm'};
         case 96:
-            return 'Thunderstorms with Light Hail';
+            return {description: 'Thunderstorms with Light Hail', icon: 'wi-storm-showers'};
         case 99:
-            return 'Thunderstorms with Hail';
+            return {description: 'Thunderstorms with Hail', icon: 'wi-storm-showers'};
         default:
-            return 'Unknown';
+            return {description: 'Unknown Weather'};
     }
 };
 
