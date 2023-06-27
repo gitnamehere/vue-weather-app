@@ -6,7 +6,7 @@ import Searchbar from '@/components/LocationSearchbar.vue';
 
 const weatherStore = useWeatherStore();
 
-const { weather, geocoding } = storeToRefs(weatherStore);
+const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 
 </script>
 
@@ -36,8 +36,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
             </div>
             <div v-if="weather" class="current-weather-container">
                 <div class="current-conditions-container">
-                    <i class="current-conditions wi" :class="parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day }).icon"></i>
-                    <text class="current-conditions">{{ parseWeatherCode({ code: weather.current_weather.weathercode, isDay: weather.current_weather.is_day }).description }}</text>
+                    <i class="current-conditions wi" :class="weatherConditions.icon"></i>
+                    <text class="current-conditions">{{ weatherConditions.description }}</text>
                 </div>
                 <div class="current-temperature-container">
                     <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
@@ -52,15 +52,13 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                         <text class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</text>
                         <text class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</text>
                     </div>
-                    <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph</text>
+                    <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</text>
                 </div>
             </div>
             <div v-else>
                 <h1>404 Not Found</h1>
-                <text>This means you either reloaded the page or the location you searched could not be found within Open-Meteo's Geocoding API.</text>
+                <text>This means you either reloaded the page, the location you searched could not be found, or an error occured.</text>
             </div>
-            <!--Unfinished stuff-->
-            <text v-if="weather">Windspeed: {{weather.current_weather.windspeed}}mph @ {{weather.current_weather.winddirection}}° (compass directions coming soon!)</text>
         </div>
         <footer class="footer">
             <text>This is the weather page. (under development)</text>
@@ -178,7 +176,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
     .weather-data-container {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
 
         height: 60%;

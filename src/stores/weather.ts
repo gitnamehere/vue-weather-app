@@ -2,6 +2,8 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
+import parseWeatherCode from '@/utils/weatherCodes';
+
 const API_URL = "https://api.open-meteo.com/v1/";
 const GEOCODING_API_URL = "https://geocoding-api.open-meteo.com/v1/";
 
@@ -13,6 +15,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const temperature_unit = ref("fahrenheit");
   const geocoding = ref(); // This will be a JSON object based on the API's geocoding response, or error
   const weather = ref(); // This will be a JSON object based on the API's current_weather response, or error
+  const weatherConditions = ref(); // This will be a JSON object for the current weather conditions, using parseWeatherCode()
 
   const setLocation = (locationSearch: string) => {
     location.value = locationSearch;
@@ -22,7 +25,6 @@ export const useWeatherStore = defineStore('weather', () => {
     axios
       .get(`${GEOCODING_API_URL}search?name=${location.value}&count=1&language=en&format=json`)
       .then((res) => {
-        console.log(res);
         longitude.value = res.data.results[0].longitude;
         latitude.value = res.data.results[0].latitude;
         geocoding.value = res.data.results[0];
@@ -49,15 +51,16 @@ export const useWeatherStore = defineStore('weather', () => {
     axios
       .get(requestUrl)
       .then((res) => {
-          console.log(res);
           weather.value = res.data;
+          weatherConditions.value = parseWeatherCode({ code: weather.value.current_weather.weathercode, isDay: weather.value.current_weather.is_day });
       })
       .catch((err) => {
-          console.log(err);
-          weather.value = "Error: Weather Data Error.";
+        console.log(err);
+        geocoding.value = null;
+        weather.value = null;
       });
     };
   }
 
-  return { location, longitude, latitude, temperature_unit, weather, geocoding, getWeather, setLocation }
+  return { location, longitude, latitude, temperature_unit, weather, geocoding, weatherConditions, getWeather, setLocation }
 })
