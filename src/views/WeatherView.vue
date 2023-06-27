@@ -55,6 +55,10 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                     <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph</text>
                 </div>
             </div>
+            <div v-else>
+                <h1>404 Not Found</h1>
+                <text>This means you either reloaded the page or the location you searched could not be found within Open-Meteo's Geocoding API.</text>
+            </div>
             <!--Unfinished stuff-->
             <text v-if="weather">Windspeed: {{weather.current_weather.windspeed}}mph @ {{weather.current_weather.winddirection}}° (compass directions coming soon!)</text>
         </div>
