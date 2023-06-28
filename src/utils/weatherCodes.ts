@@ -1,6 +1,6 @@
 interface WeatherCode {
     code: number;
-    isDay: number;
+    isDay?: number;
 } 
 
 interface weatherConditions {
@@ -8,12 +8,12 @@ interface weatherConditions {
     icon?: string;
 }
 
-const parseWeatherCode = ({code, isDay}: WeatherCode): weatherConditions => {
+const parseWeatherCode = ({code, isDay = 1}: WeatherCode): weatherConditions => {
     switch (code) {
         case 0:
             return isDay ? {description: 'Sunny', icon: 'wi-day-sunny'} : {description: 'Clear', icon: 'wi-night-clear'};
         case 1:
-            return  isDay ? {description: 'Mostly Sunny', icon: 'wi-day-sunny-high'} : {description: 'Mostly Clear', icon: 'wi-night-alt-cloudy-high'};
+            return  isDay ? {description: 'Mostly Sunny', icon: 'wi-day-cloudy-high'} : {description: 'Mostly Clear', icon: 'wi-night-alt-cloudy-high'};
         case 2:
             return {description: 'Partly Cloudy', icon: isDay? 'wi-night-partly-cloudy' : 'wi-night-alt-partly-cloudy'};
         case 3:
