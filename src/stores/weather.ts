@@ -42,7 +42,7 @@ export const useWeatherStore = defineStore('weather', () => {
       `?latitude=${latitude.value}` +
       `&longitude=${longitude.value}` +
       `&current_weather=true` +
-      `&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset` +
+      `&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
       `&temperature_unit=${temperature_unit.value}` +
       `&windspeed_unit=mph` + 
       `&precipitation_unit=inch` +
@@ -51,8 +51,9 @@ export const useWeatherStore = defineStore('weather', () => {
     axios
       .get(requestUrl)
       .then((res) => {
-          weather.value = res.data;
-          weatherConditions.value = parseWeatherCode({ code: weather.value.current_weather.weathercode, isDay: weather.value.current_weather.is_day });
+        console.log(res.data);
+        weather.value = res.data;
+        weatherConditions.value = parseWeatherCode({ code: weather.value.current_weather.weathercode, isDay: weather.value.current_weather.is_day });
       })
       .catch((err) => {
         console.log(err);

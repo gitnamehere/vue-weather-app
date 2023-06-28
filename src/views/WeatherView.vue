@@ -8,6 +8,8 @@ const weatherStore = useWeatherStore();
 
 const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 
+const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 </script>
 
 <!--TODO: refactor code into seperate components-->
@@ -29,12 +31,12 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             </div>
         </div>
 
-        <div class="body">
-            <div v-if="geocoding" class="location">
+        <div v-if="weather" class="body">
+            <div class="location">
                 <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
                 <h2>{{geocoding.country}}</h2>
             </div>
-            <div v-if="weather" class="current-weather-container">
+            <div class="current-weather-container">
                 <div class="current-conditions-container">
                     <i class="current-conditions wi" :class="weatherConditions.icon"></i>
                     <text class="current-conditions">{{ weatherConditions.description }}</text>
@@ -55,11 +57,26 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
                     <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</text>
                 </div>
             </div>
-            <div v-else>
+
+            <div v-if="weather.daily">
+                <h2>Daily Weather (WIP)</h2>
+                <div>
+                    <div v-for="day in 7">
+                        <i class="current-conditions wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
+                        <text>&nbsp{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
+                        <text> Low: {{ weather.daily.temperature_2m_min[day-1] }}</text>
+                        <text>{{ weather.daily_units.temperature_2m_min }}</text>
+                        <text> High {{ weather.daily.temperature_2m_max[day-1] }}</text>
+                        <text>{{ weather.daily_units.temperature_2m_max }}</text>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-else class="body">
                 <h1>404 Not Found</h1>
                 <text>This means you either reloaded the page, the location you searched could not be found, or an error occured.</text>
             </div>
-        </div>
         <footer class="footer">
             <text>This is the weather page. (under development)</text>
             <a href="https://open-meteo.com/" style="color: #f8f8f8;"><u>Weather data by Open-Meteo.com</u></a>
