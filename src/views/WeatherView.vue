@@ -38,7 +38,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             </div>
             <div class="current-weather-container">
                 <div class="current-conditions-container">
-                    <i class="current-conditions wi" :class="weatherConditions.icon"></i>
+                    <i class="current-conditions current-conditions-icon wi" :class="weatherConditions.icon"></i>
                     <text class="current-conditions">{{ weatherConditions.description }}</text>
                 </div>
                 <div class="current-temperature-container">
@@ -58,19 +58,27 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 </div>
             </div>
 
-            <div v-if="weather.daily">
-                <h2>Daily Weather (WIP)</h2>
-                <div>
-                    <div v-for="day in 7">
-                        <i class="current-conditions wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
-                        <text>&nbsp{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
-                        <text> Low: {{ weather.daily.temperature_2m_min[day-1] }}</text>
-                        <text>{{ weather.daily_units.temperature_2m_min }}</text>
-                        <text> High {{ weather.daily.temperature_2m_max[day-1] }}</text>
-                        <text>{{ weather.daily_units.temperature_2m_max }}</text>
+            <div v-if="weather.daily" class="daily-weather">
+                <h2>7 Day Forecast (WIP)</h2>
+                <div class="daily-weather-list">
+                    <div v-for="day in 7" class="daily-weather-item">
+                        <text>{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
+                        <i class="daily-icon wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
+                        <div>
+                            <div>
+                                <text> L: {{ weather.daily.temperature_2m_min[day-1] }}</text>
+                                <text>{{ weather.daily_units.temperature_2m_min }}</text>
+                            </div>
+                            <div>
+                                <text> H: {{ weather.daily.temperature_2m_max[day-1] }}</text>
+                                <text>{{ weather.daily_units.temperature_2m_max }}</text>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div style="height: 5rem;"></div>
         </div>
 
         <div v-else class="body">
@@ -168,6 +176,10 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         line-height: 2rem;
     }
 
+    .current-conditions-icon {
+        font-size: 2rem;
+    }
+
     .current-temperature-container {
         display: flex;
         flex-direction: row;
@@ -203,6 +215,42 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         font-weight: 500;
     }
 
+    .daily-weather {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        height: 10rem;
+        width: 80%;
+        margin: 2rem;
+
+        background-color: #4444;
+        border-radius: 16px;
+    }
+
+    .daily-icon {
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+
+    .daily-weather-list {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+        height: 100%;
+        width: 100%;
+    }
+
+    .daily-weather-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        height: 100%;
+    }
     .footer {
         position: fixed;
         left: 0;
@@ -243,6 +291,11 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             width: 95%;
         }
 
+        .current-conditions-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
         .current-temperature-container {
             margin: 0;
         }
@@ -256,6 +309,10 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         
         .min-max-temperature:nth-child(even) {
             margin-right: 1rem;
+        }
+
+        .daily-weather {
+            margin: 1rem 0;
         }
     }
 
@@ -273,7 +330,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     /* Day: 2885dd */
     /* Night: 111128 */
     .background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
