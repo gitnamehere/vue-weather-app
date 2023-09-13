@@ -43,7 +43,7 @@ import Searchbar from '@/components/LocationSearchbar.vue';
 
     .searchBar {
     margin-top: 1rem;
-    width: 60%;
+    width: 50%;
     }
 
     .background {

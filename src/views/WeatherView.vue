@@ -111,7 +111,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         justify-content: space-around;
 
         width: 100vw;
-        padding: 1rem 5rem;
+        padding: 1rem 10rem;
         margin-bottom: 1rem;
 
         background: #0f406e;
