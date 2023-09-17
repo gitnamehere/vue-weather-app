@@ -9,7 +9,7 @@ const location = ref('');
 const locationsSearched = ref(false);
 const { locations } = storeToRefs(weatherStore);
 
-let timer: ReturnType<typeof setTimeout>;
+let timer: number;
 
 const getLocations = () => {
     clearTimeout(timer);
