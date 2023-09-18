@@ -16,7 +16,7 @@ const getLocations = () => {
     timer = setTimeout(() => {
         weatherStore.getLocations(location.value);
         locationsSearched.value = true;
-    }, 1000);
+    }, 750);
 }
 const getWeather = () => {
     clearTimeout(timer);
@@ -62,54 +62,53 @@ const getWeatherByCoords = (location: any) => {
     align-items: center;
     justify-content: center;
 
+    border: 1px solid #ccc;
+    border-radius: 16px;
     height: 3rem;
     width: 100%;
     padding: 10px;
 
     background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 16px;
 
     font-size: 1.2rem;
     }
 
     .searchbar input {
+    border: none;
     height: 100%;
     width: 89%;
-
-    border: none;
 
     outline: none;
     font-size: 1.2rem;
     }
 
     .searchbar button {
-    width: auto;
-    height: 100%;
     margin: auto;
     margin-right: 0;
-
-    background-color: transparent;
     border: none;
     border-radius: 100px;
+    height: 100%;
+    width: auto;
+
+    background-color: transparent;
     }
 
     .location-list-container {
     position: absolute;
 
     margin-top: 1rem;
-
     border-radius: 8px;
+
     background-color: white;
     color: #000;
     }
 
     .location-list-item {
+        margin-bottom: 2px;
+        border-bottom: 1px solid #000;
         width: 100%;
         height: 100%;
         padding: 0.5rem 1rem;
-        margin-bottom: 2px;
-        border-bottom: 1px solid #000;
     }
     
     .location-list-container :last-child {
