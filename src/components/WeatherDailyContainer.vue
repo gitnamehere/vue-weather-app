@@ -10,7 +10,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 <template>
     <div v-if="weather.daily" class="daily-weather">
-        <h2>7 Day Forecast (WIP)</h2>
+        <h2>7 Day Forecast</h2>
         <div class="daily-weather-list">
             <div v-for="day in 7" class="daily-weather-item">
                 <text>{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
@@ -37,24 +37,27 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         align-items: center;
         justify-content: center;
 
-        height: 10rem;
-        width: 80%;
         margin: 2rem;
+        border-radius: 16px;
+        height: 12rem;
+        width: 60%;
+        padding: 1rem 1rem;
 
         background-color: #4444;
-        border-radius: 16px;
     }
 
     .daily-icon {
-        font-size: 2rem;
         margin: 10px 0;
+        font-size: 2rem;
     }
 
     .daily-weather-list {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+
+        overflow-x: scroll;
 
         height: 100%;
         width: 100%;
@@ -65,12 +68,17 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         flex-direction: column;
         align-items: center;
 
+        margin: 0px 5px;
         height: 100%;
+        width: 6rem;
+        min-width: 80px;
     }
+
     @media (max-width: 768px) {
 
         .daily-weather {
             margin: 1rem 0;
+            width: 95%;
         }
     }
 </style>

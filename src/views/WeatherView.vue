@@ -88,9 +88,9 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         align-items: center;
         justify-content: space-around;
 
+        margin-bottom: 1rem;
         width: 100vw;
         padding: 1rem 10rem;
-        margin-bottom: 1rem;
 
         background: #0f406e;
         box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
@@ -234,8 +234,8 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         }
 
         .current-conditions-icon {
-            font-size: 3rem;
             margin-bottom: 1rem;
+            font-size: 3rem;
         }
 
         .current-temperature-container {
