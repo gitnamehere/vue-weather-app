@@ -10,9 +10,11 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 <template>
     <div v-if="weather.daily" class="daily-weather">
-        <h2>7 Day Forecast</h2>
+        <div class="title">
+            <h2>10 Day Forecast</h2>
+        </div>
         <div class="daily-weather-list">
-            <div v-for="day in 7" class="daily-weather-item">
+            <div v-for="day in 10" class="daily-weather-item">
                 <text>{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
                 <i class="daily-icon wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
                 <div>
@@ -35,15 +37,19 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
 
-        margin: 2rem;
+        margin: 2rem 0;
         border-radius: 16px;
-        height: 12rem;
-        width: 60%;
+        height: 14em;
+        width: 54%;
         padding: 1rem 1rem;
 
-        background-color: #4444;
+        background-color: #5684;
+    }
+
+    .daily-weather h2 {
+        margin: 0 0 5px 0;
     }
 
     .daily-icon {
@@ -55,10 +61,10 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
 
         overflow-x: scroll;
 
+        margin: auto;
         height: 100%;
         width: 100%;
     }
@@ -68,10 +74,19 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         flex-direction: column;
         align-items: center;
 
-        margin: 0px 5px;
-        height: 100%;
-        width: 6rem;
+        margin: 0px 10px;
+        padding: 5px 0;
+        height: auto;
+        width: auto;
         min-width: 80px;
+
+        background-color: #AAA2;
+        border-radius: 8px;
+    }
+
+    .title {
+        display: block;
+        width: 97%;
     }
 
     @media (max-width: 768px) {
@@ -80,5 +95,9 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             margin: 1rem 0;
             width: 95%;
         }
+    }
+
+    text {
+        font-size: 16px;
     }
 </style>

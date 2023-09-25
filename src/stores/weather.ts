@@ -68,7 +68,8 @@ export const useWeatherStore = defineStore('weather', () => {
       `&temperature_unit=${temperature_unit.value}` +
       `&windspeed_unit=mph` + 
       `&precipitation_unit=inch` +
-      `&timezone=auto`;
+      `&timezone=auto` +
+      `&forecast_days=10`;
 
     axios
       .get(requestUrl)

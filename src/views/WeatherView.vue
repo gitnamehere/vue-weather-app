@@ -111,7 +111,6 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         justify-content: start;
 
         height: auto;
-        padding: 0 2%;
     }
 
     .location {
