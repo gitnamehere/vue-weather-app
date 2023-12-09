@@ -14,7 +14,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             <h2>10 Day Forecast</h2>
         </div>
         <div class="daily-weather-list">
-            <div v-for="day in 10" class="daily-weather-item">
+            <div v-for="day in 10" :key=day class="daily-weather-item">
                 <text>{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</text>
                 <i class="daily-icon wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
                 <div>

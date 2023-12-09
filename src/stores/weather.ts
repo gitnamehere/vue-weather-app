@@ -4,15 +4,14 @@ import axios from 'axios'
 
 import parseWeatherCode from '@/utils/weatherCodes';
 
-const API_URL = "https://api.open-meteo.com/v1/";
-const GEOCODING_API_URL = "https://geocoding-api.open-meteo.com/v1/";
+import { API_URL, GEOCODING_API_URL, TEMPERATURE } from '@/utils/constants';
 
 export const useWeatherStore = defineStore('weather', () => {
 
   const location = ref("");
   const longitude = ref();
   const latitude = ref();
-  const temperature_unit = ref("fahrenheit");
+  const temperature_unit = ref(TEMPERATURE.FAHRENHEIT);
   const geocoding = ref(); // This will be a JSON object based on the API's geocoding response, or error
   const weather = ref(); // This will be a JSON object based on the API's current_weather response, or error
   const weatherConditions = ref(); // This will be a JSON object for the current weather conditions, using parseWeatherCode()

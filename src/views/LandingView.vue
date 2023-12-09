@@ -3,12 +3,9 @@ import Searchbar from '@/components/LocationSearchbar.vue';
 </script>
 
 <template>
-    <div class="background" ></div>
     <div class="container">
         <h1>A Vue Weather App</h1>
-        <div class="searchBar">
-            <Searchbar />
-        </div>
+        <Searchbar class="searchBar"/>
         <div class="weatherApiLink">
             <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
         </div>
@@ -44,17 +41,5 @@ import Searchbar from '@/components/LocationSearchbar.vue';
     .searchBar {
     margin-top: 1rem;
     width: 50%;
-    }
-
-    .background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-
-    width: 100vw;
-    height: 100vh;
-
-    background-color: transparent;
     }
 </style>

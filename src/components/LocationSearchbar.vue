@@ -37,14 +37,30 @@ const getWeatherByCoords = (location: any) => {
 <template>
     <div>
         <div class="searchbar">
-            <input v-model="location" placeholder="Enter a city or zip code" @keyup.stop="getLocations" @keyup.enter="getWeather"/>
+            <input
+                v-model="location"
+                placeholder="Enter a city or zip code"
+                @keyup.stop="getLocations"
+                @keyup.enter="getWeather"
+            />
             <button @click="getWeather">
-            <font-awesome-icon :icon="['fas', 'magnifying-glass']" style="color: #282;" size="xl" />
+            <font-awesome-icon 
+                :icon="['fas', 'magnifying-glass']" 
+                style="color: #282;" 
+                size="xl"
+            />
             </button>
         </div>
         <div v-if="locationsSearched" class="location-list-container">
-            <div v-for="location in locations"  @click="getWeatherByCoords(location)" class="location-list-item">
-                <text>{{ location.name }}, {{ location.admin1 }}</text>
+            <div 
+                v-for="location in locations"  
+                :key=location 
+                @click="getWeatherByCoords(location)"
+                class="location-list-item"
+            >
+                <text>
+                    {{ location.name }}, {{ location.admin1 }}
+                </text>
             </div>
         </div>
     </div>
@@ -76,7 +92,7 @@ const getWeatherByCoords = (location: any) => {
     .searchbar input {
     border: none;
     height: 100%;
-    width: 89%;
+    width: 95%;
 
     outline: none;
     font-size: 1.2rem;
@@ -88,7 +104,6 @@ const getWeatherByCoords = (location: any) => {
     border: none;
     border-radius: 100px;
     height: 100%;
-    width: auto;
 
     background-color: transparent;
     }
