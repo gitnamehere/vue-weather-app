@@ -18,6 +18,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "axios": "^1.4.0",
     "pinia": "^2.1.3",
+    "sass": "^1.70.0",
     "vue": "^3.3.4",
     "vue-fontawesome": "^0.0.2",
     "vue-router": "^4.2.2"
