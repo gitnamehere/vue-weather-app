@@ -58,9 +58,9 @@ const getWeatherByCoords = (location: any) => {
                 @click="getWeatherByCoords(location)"
                 class="location-list-item"
             >
-                <text>
+                <p>
                     {{ location.name }}, {{ location.admin1 }}
-                </text>
+                </p>
             </div>
         </div>
     </div>

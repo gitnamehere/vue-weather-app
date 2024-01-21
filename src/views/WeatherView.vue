@@ -38,22 +38,22 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             <div class="current-weather-container">
                 <div class="current-conditions-container">
                     <i class="current-conditions current-conditions-icon wi" :class="weatherConditions.icon"></i>
-                    <text class="current-conditions">{{ weatherConditions.description }}</text>
+                    <p class="current-conditions">{{ weatherConditions.description }}</p>
                 </div>
                 <div class="current-temperature-container">
                     <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
-                    <text class="current-temperature-unit">{{weather.daily_units.temperature_2m_min}}</text>
+                    <p class="current-temperature-unit">{{weather.daily_units.temperature_2m_min}}</p>
                 </div>
                 <div v-if="weather.daily" class="weather-data-container">
                     <div>
-                        <text class="min-max-temperature">H: {{weather.daily.temperature_2m_max[0]}}</text>
-                        <text class="min-max-temperature">{{weather.daily_units.temperature_2m_max}}</text>
+                        <p class="min-max-temperature">H: {{weather.daily.temperature_2m_max[0]}}</p>
+                        <p class="min-max-temperature">{{weather.daily_units.temperature_2m_max}}</p>
                     </div>
                     <div>
-                        <text class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</text>
-                        <text class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</text>
+                        <p class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</p>
+                        <p class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</p>
                     </div>
-                    <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</text>
+                    <p class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</p>
                 </div>
             </div>
             <DailyWeatherContainer />
@@ -61,10 +61,10 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 
         <div v-else class="body">
                 <h1>404 Not Found</h1>
-                <text>This means you either reloaded the page, the location you searched could not be found, or an error occured.</text>
+                <p>This means you either reloaded the page, the location you searched could not be found, or an error occured.</p>
             </div>
         <footer class="footer">
-            <text>This is the weather page. (under development)</text>
+            <p>This is the weather page. (under development)</p>
             <a href="https://open-meteo.com/" style="color: #f8f8f8;"><u>Weather data by Open-Meteo.com</u></a>
         </footer>
     </div>
