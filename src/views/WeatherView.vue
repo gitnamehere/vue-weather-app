@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 
 import Searchbar from '@/components/LocationSearchbar.vue';
-import WeatherDailyContainer from '@/components/WeatherDailyContainer.vue';
+import DailyWeatherContainer from '@/components/DailyWeatherContainer.vue';
 
 const weatherStore = useWeatherStore();
 
@@ -56,7 +56,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
                     <text class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</text>
                 </div>
             </div>
-            <WeatherDailyContainer />
+            <DailyWeatherContainer />
         </div>
 
         <div v-else class="body">
