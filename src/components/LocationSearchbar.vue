@@ -31,7 +31,6 @@ const getWeatherByCoords = (location: any) => {
     weatherStore.getWeatherByCoords(location);
     router.push('/weather');
 };
-
 </script>
 
 <template>
