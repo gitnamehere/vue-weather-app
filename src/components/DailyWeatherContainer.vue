@@ -15,17 +15,17 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         </div>
         <div class="daily-weather__list">
             <div v-for="day in 10" :key=day class="daily-weather__list-item">
-                <p>{{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}</p>
+                <p class="daily-weather__text">
+                    {{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}
+                </p>
                 <i class="daily-weather__icon wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
                 <div>
-                    <div>
-                        <p> L: {{ weather.daily.temperature_2m_min[day-1] }}</p>
-                        <p>{{ weather.daily_units.temperature_2m_min }}</p>
-                    </div>
-                    <div>
-                        <p> H: {{ weather.daily.temperature_2m_max[day-1] }}</p>
-                        <p>{{ weather.daily_units.temperature_2m_max }}</p>
-                    </div>
+                    <p class="daily-weather__text">
+                        L: {{ `${weather.daily.temperature_2m_min[day-1]}${weather.daily_units.temperature_2m_min}` }}
+                    </p>
+                    <p class="daily-weather__text">
+                        H: {{ `${weather.daily.temperature_2m_max[day-1]}${weather.daily_units.temperature_2m_max}` }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             margin-bottom: 5px;
         }
 
-        p {
+        &__text {
             font-size: 16px;
         }
     }
