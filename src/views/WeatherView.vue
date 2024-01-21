@@ -3,11 +3,12 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 
 import Searchbar from '@/components/LocationSearchbar.vue';
+import CurrentWeatherContainer from '@/components/CurrentWeatherContainer.vue'
 import DailyWeatherContainer from '@/components/DailyWeatherContainer.vue';
 
 const weatherStore = useWeatherStore();
 
-const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
+const { weather, geocoding } = storeToRefs(weatherStore);
 
 </script>
 
@@ -20,46 +21,26 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         <div v-else class="background night"></div>
     </div>
 
-    <div class="container">
-        <div class="top-bar">
+    <div class="weather">
+        <div class="weather__top-bar">
             <a href="/">
                 <h1>A Vue Weather App</h1>
             </a>
-            <div class="top-bar-search">
+            <div class="weather__search-bar">
                 <Searchbar />
             </div>
         </div>
 
-        <div v-if="weather" class="body">
-            <div class="location">
+        <div v-if="weather" class="weather__container">
+            <div class="weather__location">
                 <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
                 <h2>{{geocoding.country}}</h2>
             </div>
-            <div class="current-weather-container">
-                <div class="current-conditions-container">
-                    <i class="current-conditions current-conditions-icon wi" :class="weatherConditions.icon"></i>
-                    <p class="current-conditions">{{ weatherConditions.description }}</p>
-                </div>
-                <div class="current-temperature-container">
-                    <h2 class="current-temperature">{{weather.current_weather.temperature}}</h2>
-                    <p class="current-temperature-unit">{{weather.daily_units.temperature_2m_min}}</p>
-                </div>
-                <div v-if="weather.daily" class="weather-data-container">
-                    <div>
-                        <p class="min-max-temperature">H: {{weather.daily.temperature_2m_max[0]}}</p>
-                        <p class="min-max-temperature">{{weather.daily_units.temperature_2m_max}}</p>
-                    </div>
-                    <div>
-                        <p class="min-max-temperature">L: {{weather.daily.temperature_2m_min[0]}}</p>
-                        <p class="min-max-temperature">{{weather.daily_units.temperature_2m_min}}</p>
-                    </div>
-                    <p class="min-max-temperature"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</p>
-                </div>
-            </div>
+            <CurrentWeatherContainer />
             <DailyWeatherContainer />
         </div>
 
-        <div v-else class="body">
+        <div v-else class="weather__container">
                 <h1>404 Not Found</h1>
                 <p>This means you either reloaded the page, the location you searched could not be found, or an error occured.</p>
             </div>
@@ -71,7 +52,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 </template>
 
 <style scoped>
-    .container {
+    .weather {
         align-items: center;
         justify-content: center;
 
@@ -82,7 +63,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         text-shadow:  0px 2px 8px #0004;
     }
 
-    .top-bar {
+    .weather__top-bar {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -98,13 +79,13 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         animation: fadein 0.5s;
     }
 
-    .top-bar h1 {
+    .weather__top-bar h1 {
         font-weight: 500;
         font-size: 1.5vw;
         color: #f8f8f8;
     }
 
-    .body {
+    .weather__container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -113,83 +94,12 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         height: auto;
     }
 
-    .location {
+    .weather__location {
         display: flex;
         flex-direction: column;
         align-items: center;
 
         margin: 1rem 0rem auto;
-    }
-
-    .current-weather-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        height: 10rem;
-        width: 80%;
-    }
-
-    .current-conditions-img {
-        height: 100%;
-        width: auto;
-    }
-
-    .current-conditions-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        height: 100%;
-        width: 15%;
-        padding: 1rem 0;
-
-    }
-
-    .current-conditions {
-        font-size: 1.5rem;
-        font-weight: 500;
-        line-height: 2rem;
-    }
-
-    .current-conditions-icon {
-        font-size: 2rem;
-    }
-
-    .current-temperature-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-
-        height: 100%;
-        width: 15rem;
-        margin: 2rem;
-    }
-
-    .current-temperature {
-        font-size: 5rem;
-        font-weight: 500;
-        line-height: 5rem;
-    }
-    .current-temperature-unit {
-        margin-top: -1.7rem;
-        font-size: 2rem;
-        font-weight: 200;
-    }
-
-    .weather-data-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        height: 60%;
-        width: 15%;
-    }
-
-    .min-max-temperature {
-        font-weight: 500;
     }
 
     .footer {
@@ -208,19 +118,19 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
     }
 
     @media (max-width: 768px) {
-        .top-bar {
+        .weather__top-bar {
             padding: 1rem;
         }
 
-        .top-bar h1 {
+        .weather__top-bar h1 {
         display: none;
         }
 
-        .top-bar-search {
+        .weather__search-bar {
         width: 100%;
         }
 
-        .current-weather-container {
+        .weather__current-weather {
             flex-direction: column;
             margin: 2rem;
 
@@ -254,7 +164,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
     }
 
     @media (min-width: 769px) {
-        .top-bar-search {
+        .weather__search-bar {
         width: 80%;
         }
     }
