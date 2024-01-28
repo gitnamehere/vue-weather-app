@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
-import parseWeatherCode from '../utils/weatherCodes';
+import parseWeatherCode from '@/utils/weatherCodes';
 const weatherStore = useWeatherStore();
 const { weather } = storeToRefs(weatherStore);
 

@@ -3,8 +3,8 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 
 import Searchbar from '@/components/LocationSearchbar.vue';
-import CurrentWeatherContainer from '@/components/CurrentWeatherContainer.vue'
-import DailyWeatherContainer from '@/components/DailyWeatherContainer.vue';
+import CurrentWeather from '@/components/CurrentWeather.vue'
+import DailyWeather from '@/components/DailyWeather.vue';
 
 const weatherStore = useWeatherStore();
 
@@ -36,8 +36,8 @@ const { weather, geocoding } = storeToRefs(weatherStore);
                 <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
                 <h2>{{geocoding.country}}</h2>
             </div>
-            <CurrentWeatherContainer />
-            <DailyWeatherContainer />
+            <CurrentWeather />
+            <DailyWeather />
         </div>
 
         <div v-else class="weather__container">
