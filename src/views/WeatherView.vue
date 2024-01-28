@@ -17,7 +17,7 @@ const { weather } = storeToRefs(weatherStore);
 <template>
     <div 
         class="weather" 
-        :class="weather?.current_weather.is_day ? 'background day' : 'background night'"
+        :class="weather?.current_weather.is_day ? 'weather--day' : 'weather--night'"
     >
         <div class="weather__top-bar">
             <a href="/">
@@ -85,7 +85,17 @@ const { weather } = storeToRefs(weatherStore);
             align-items: center;
             justify-content: start;
 
-            height: auto;
+            @media (max-width: 767px) {
+                padding: 0 2rem;
+            }
+        }
+
+        &--day {
+            background-color: #2885dd;
+        }
+
+        &--night {
+            background-color: #111128;
         }
     }
 
@@ -104,7 +114,7 @@ const { weather } = storeToRefs(weatherStore);
         text-align: center;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         .weather__top-bar {
             padding: 1rem;
         }
@@ -115,25 +125,6 @@ const { weather } = storeToRefs(weatherStore);
 
         .weather__search-bar {
         width: 100%;
-        }
-
-        .weather__current-weather {
-            flex-direction: column;
-            margin: 2rem;
-
-
-            height: auto;
-        }
-
-        .weather-data-container {
-            flex-direction: row;
-            margin-top: 1rem;
-
-            width: 95%;
-        }
-        
-        .min-max-temperature:nth-child(even) {
-            margin-right: 1rem;
         }
     }
 
@@ -147,17 +138,4 @@ const { weather } = storeToRefs(weatherStore);
         from { opacity: 0; }
         to   { opacity: 1; }
     }
-
-    /* Day: 2885dd */
-    /* Night: 111128 */
-
-
-    .day {
-    background-color: #2885dd;
-    }
-
-    .night {
-    background-color: #111128;
-    }
-
 </style>

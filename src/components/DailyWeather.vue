@@ -41,13 +41,17 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             justify-content: space-evenly;
 
             border-radius: 16px;
-            width: 48rem;
+            width: 100%;
             padding: 1rem;
 
             background-color: #5684;
             
-            @media (max-width: 768px) {
-                width: 95%;
+            @media (min-width: 768px) {
+                width: 40rem;
+            }
+
+            @media (min-width: 1024px) {
+                width: auto;
             }
         }
     
@@ -63,7 +67,7 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             flex-direction: row;
             align-items: center;
 
-            overflow-x: scroll;
+            overflow-x: auto;
             width: 100%;
         }
 
@@ -74,7 +78,6 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
             margin: 8px;
             padding: 4px 0;
-            height: auto;
             min-width: 80px;
 
             background-color: #AAA2;
@@ -86,6 +89,10 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
             &:last-of-type {
                 margin-right: 0;
+            }
+
+            @media (min-width: 1024px) {
+                margin-bottom: 0;
             }
         }
 

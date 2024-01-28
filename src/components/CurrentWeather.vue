@@ -52,13 +52,15 @@ const { weatherConditions } = storeToRefs(weatherStore);
             align-items: center;
 
             margin-bottom: 1rem;
+
+            text-align: center;
         }
 
         &__weather-container {
             display: flex;
             flex-direction: row;
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 flex-direction: column;
             }
         }
@@ -77,9 +79,9 @@ const { weatherConditions } = storeToRefs(weatherStore);
             height: 100%;
             padding: 1rem 0;
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
+                flex-direction: row;
                 width: 95%;
-                padding: 1rem 0;
             }
         }
 
@@ -92,8 +94,8 @@ const { weatherConditions } = storeToRefs(weatherStore);
         &__conditions-icon {
             font-size: 2rem;
 
-            @media (max-width: 768px) {
-                margin-bottom: 1rem;
+            @media (max-width: 767px) {
+                margin-right: 1rem;
                 font-size: 3rem;
             }
         }
@@ -129,7 +131,7 @@ const { weatherConditions } = storeToRefs(weatherStore);
 
             text-wrap: nowrap;
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 flex-direction: row;
 
                 width: 95%;
@@ -139,7 +141,7 @@ const { weatherConditions } = storeToRefs(weatherStore);
         &__data-text {
             font-weight: 500;
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 margin-right: 1rem;
             }
         }
