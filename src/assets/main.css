@@ -33,7 +33,7 @@ a,
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  height: 10px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {

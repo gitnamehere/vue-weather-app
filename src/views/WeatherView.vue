@@ -8,20 +8,17 @@ import DailyWeather from '@/components/DailyWeather.vue';
 
 const weatherStore = useWeatherStore();
 
-const { weather, geocoding } = storeToRefs(weatherStore);
+const { weather } = storeToRefs(weatherStore);
 
 </script>
 
 <!--TODO: refactor code into seperate components-->
 
 <template>
-    <!--Background-->
-    <div v-if="weather">
-        <div v-if="weather.current_weather.is_day" class="background day"></div>
-        <div v-else class="background night"></div>
-    </div>
-
-    <div class="weather">
+    <div 
+        class="weather" 
+        :class="weather?.current_weather.is_day ? 'background day' : 'background night'"
+    >
         <div class="weather__top-bar">
             <a href="/">
                 <h1>A Vue Weather App</h1>
@@ -32,10 +29,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
         </div>
 
         <div v-if="weather" class="weather__container">
-            <div class="weather__location">
-                <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
-                <h2>{{geocoding.country}}</h2>
-            </div>
             <CurrentWeather />
             <DailyWeather />
         </div>
@@ -51,7 +44,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .weather {
         align-items: center;
         justify-content: center;
@@ -61,45 +54,39 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 
         color: #f8f8f8;
         text-shadow:  0px 2px 8px #0004;
-    }
-
-    .weather__top-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-
-        margin-bottom: 1rem;
-        width: 100vw;
-        padding: 1rem 10rem;
-
-        background: #0f406e;
-        box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
 
         animation: fadein 0.5s;
-    }
 
-    .weather__top-bar h1 {
-        font-weight: 500;
-        font-size: 1.5vw;
-        color: #f8f8f8;
-    }
+        &__top-bar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
 
-    .weather__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
+            margin-bottom: 2rem;
+            width: 100vw;
+            padding: 1rem 10rem;
 
-        height: auto;
-    }
+            background: #0f406e;
+            box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
 
-    .weather__location {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+            animation: fadein 0.5s;
 
-        margin: 1rem 0rem auto;
+            h1 {
+                font-weight: 500;
+                font-size: 1.5vw;
+                color: #f8f8f8;
+            }
+        }
+
+        &__container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+
+            height: auto;
+        }
     }
 
     .footer {
@@ -138,19 +125,6 @@ const { weather, geocoding } = storeToRefs(weatherStore);
             height: auto;
         }
 
-        .current-conditions-container {
-            width: 95%;
-        }
-
-        .current-conditions-icon {
-            margin-bottom: 1rem;
-            font-size: 3rem;
-        }
-
-        .current-temperature-container {
-            margin: 0;
-        }
-
         .weather-data-container {
             flex-direction: row;
             margin-top: 1rem;
@@ -176,16 +150,7 @@ const { weather, geocoding } = storeToRefs(weatherStore);
 
     /* Day: 2885dd */
     /* Night: 111128 */
-    .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
 
-    animation: fadein 0.5s;
-    }
 
     .day {
     background-color: #2885dd;
