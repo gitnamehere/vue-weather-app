@@ -71,6 +71,11 @@ const { weatherConditions } = storeToRefs(weatherStore);
             display: flex;
         }
 
+        &__conditions,
+        &__data {
+            width: 10rem;
+        }
+
         &__conditions {
             flex-direction: column;
             align-items: center;
@@ -78,9 +83,11 @@ const { weatherConditions } = storeToRefs(weatherStore);
 
             height: 100%;
             padding: 1rem 0;
+            padding-left: 6rem;
 
             @media (max-width: 767px) {
                 flex-direction: row;
+                padding-left: unset;
                 width: 95%;
             }
         }

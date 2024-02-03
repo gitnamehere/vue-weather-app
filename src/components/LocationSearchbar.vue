@@ -123,6 +123,7 @@ const getWeatherByCoords = (location: any) => {
 
             &:hover{
                 background-color: #ccc;
+                cursor: pointer;
 
                 &:first-of-type {
                     border-radius: 8px 8px 0 0;
