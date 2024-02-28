@@ -11,5 +11,5 @@ yarn
 ## Starting the Server
 
 ```sh 
-yarn build dev
+yarn vite
 ```
