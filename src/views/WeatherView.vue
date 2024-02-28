@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 
@@ -34,9 +35,9 @@ const { weather } = storeToRefs(weatherStore);
         </div>
 
         <div v-else class="weather__container">
-                <h1>404 Not Found</h1>
-                <p>This means you either reloaded the page, the location you searched could not be found, or an error occured.</p>
-            </div>
+            <h1>404 Not Found</h1>
+            <p>This means you either reloaded the page, the location you searched could not be found, or an error occured.</p>
+        </div>
         <footer class="footer">
             <p>This is the weather page. (under development)</p>
             <a href="https://open-meteo.com/" style="color: #f8f8f8;"><u>Weather data by Open-Meteo.com</u></a>
