@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
-import parseWeatherCode from '@/utils/weatherCodes';
-const weatherStore = useWeatherStore();
-const { weather } = storeToRefs(weatherStore);
+import { parseWeatherCode } from '@/utils/weatherCodes';
+
+import GridItem from '@/components/GridItem.vue';
 
 const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const weatherStore = useWeatherStore();
+const { weather } = storeToRefs(weatherStore);
 </script>
 
 <template>
-    <div v-if="weather.daily" class="daily-weather__container">
-        <div class="daily-weather__title">
-            <h2>10 Day Forecast</h2>
-        </div>
+    <GridItem v-if="weather.daily" header="10 Day Forecast" :full-width="true" class="daily-weather__container">
         <div class="daily-weather__list">
             <div v-for="day in 10" :key=day class="daily-weather__list-item">
                 <p class="daily-weather__text">
@@ -29,39 +29,20 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 </div>
             </div>
         </div>
-    </div>
+    </GridItem>
 </template>
 
 <style scoped lang="scss">
     .daily-weather {
         &__container {
-            display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
-
-            border-radius: 16px;
-            width: 100%;
-            padding: 1rem;
-
-            background-color: #5684;
-            
-            @media (min-width: 768px) {
-                width: 40rem;
-            }
-
-            @media (min-width: 1024px) {
-                width: auto;
-            }
         }
-    
 
         &__icon {
             margin: 10px 0;
             font-size: 2rem;
         }
     
-
         &__list {
             display: flex;
             flex-direction: row;
