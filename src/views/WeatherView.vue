@@ -21,8 +21,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
     >
         <div class="weather__top-bar">
             <a href="/">
-                <h1>Insert Title Here
-                </h1>
+                <h1>A Vue Weather App</h1>
             </a>
             <Searchbar class="weather__search-bar" />
             <button class="weather__menu-button" @click="weatherStore.toggleTemperatureUnit">
