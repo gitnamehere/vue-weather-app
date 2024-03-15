@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useWeatherStore } from '@/stores/weather';
-import router from '@/router';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 const weatherStore = useWeatherStore();
 
 const location = ref('');
@@ -11,6 +11,8 @@ const { locations } = storeToRefs(weatherStore);
 
 let timer: number;
 
+const router = useRouter();
+
 const getLocations = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
@@ -18,6 +20,7 @@ const getLocations = () => {
         locationsSearched.value = true;
     }, 750);
 }
+
 const getWeather = () => {
     clearTimeout(timer);
     locationsSearched.value = false;
@@ -28,8 +31,14 @@ const getWeather = () => {
 
 const getWeatherByCoords = (location: any) => {
     locationsSearched.value = false;
-    weatherStore.getWeatherByCoords(location);
-    router.push('/weather');
+    weatherStore.getWeatherFromGeocoding(location);
+    router.push({
+        name: "weather",
+        query: {
+            latitude: location.latitude,
+            longitude: location.longitude
+        }
+    });
 };
 </script>
 
@@ -72,11 +81,13 @@ const getWeatherByCoords = (location: any) => {
         align-items: center;
         justify-content: center;
 
+        box-sizing: border-box;
+
         border: 1px solid #ccc;
         border-radius: 16px;
-        height: 3rem;
+        height: 40px;
         width: 100%;
-        padding: 10px;
+        padding: 8px;
 
         background-color: #fff;
 

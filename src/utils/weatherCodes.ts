@@ -1,14 +1,14 @@
-interface WeatherCode {
+export interface WeatherCode {
     code: number;
     isDay?: number;
 } 
 
-interface weatherConditions {
+export interface WeatherConditions {
     description: string;
     icon?: string;
 }
 
-const parseWeatherCode = ({code, isDay = 1}: WeatherCode): weatherConditions => {
+export const parseWeatherCode = ({code, isDay = 1}: WeatherCode): WeatherConditions => {
     switch (code) {
         case 0:
             return isDay ? {description: 'Sunny', icon: 'wi-day-sunny'} : {description: 'Clear', icon: 'wi-night-clear'};
@@ -70,5 +70,3 @@ const parseWeatherCode = ({code, isDay = 1}: WeatherCode): weatherConditions => 
             return {description: 'Unknown Weather'};
     }
 };
-
-export default parseWeatherCode;

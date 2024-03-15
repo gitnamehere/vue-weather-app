@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
+import { TemperatureUnits } from '@/utils/constants';
 
 import Searchbar from '@/components/LocationSearchbar.vue';
 import CurrentWeather from '@/components/CurrentWeather.vue'
@@ -9,8 +9,7 @@ import DailyWeather from '@/components/DailyWeather.vue';
 
 const weatherStore = useWeatherStore();
 
-const { weather } = storeToRefs(weatherStore);
-
+const { weather, temperatureUnit } = storeToRefs(weatherStore);
 </script>
 
 <!--TODO: refactor code into seperate components-->
@@ -22,11 +21,13 @@ const { weather } = storeToRefs(weatherStore);
     >
         <div class="weather__top-bar">
             <a href="/">
-                <h1>A Vue Weather App</h1>
+                <h1>Insert Title Here
+                </h1>
             </a>
-            <div class="weather__search-bar">
-                <Searchbar />
-            </div>
+            <Searchbar class="weather__search-bar" />
+            <button class="weather__menu-button" @click="weatherStore.toggleTemperatureUnit">
+                {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? 'F' : 'C'}}
+            </button>
         </div>
 
         <div v-if="weather" class="weather__container">
@@ -47,8 +48,6 @@ const { weather } = storeToRefs(weatherStore);
 
 <style scoped lang="scss">
     .weather {
-        align-items: center;
-        justify-content: center;
 
         height: 100vh;
         width: auto;
@@ -62,11 +61,11 @@ const { weather } = storeToRefs(weatherStore);
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-around;
 
             margin-bottom: 2rem;
             width: 100vw;
-            padding: 1rem 10rem;
+            height: 72px;
+            padding: 8px 60px;
 
             background: #0f406e;
             box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
@@ -75,8 +74,23 @@ const { weather } = storeToRefs(weatherStore);
 
             h1 {
                 font-weight: 500;
-                font-size: 1.5vw;
+                font-size: 24px;
                 color: #f8f8f8;
+                margin-right: 32px
+            }
+        }
+
+        &__menu-button {
+            margin-left: 32px;
+
+            height: 40px;
+            width: 40px;
+            border-radius: 16px;
+            border: none;
+
+            
+            @media (max-width: 767px) {
+                margin-left: 16px;
             }
         }
 
@@ -131,7 +145,7 @@ const { weather } = storeToRefs(weatherStore);
 
     @media (min-width: 769px) {
         .weather__search-bar {
-        width: 80%;
+            flex-grow: 1;
         }
     }
 

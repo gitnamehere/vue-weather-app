@@ -3,9 +3,7 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 
 const weatherStore = useWeatherStore();
-const { weather, geocoding  } = storeToRefs(weatherStore);
-const { weatherConditions } = storeToRefs(weatherStore);
-
+const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 </script>
 
 <template>
@@ -16,20 +14,16 @@ const { weatherConditions } = storeToRefs(weatherStore);
         </div>
         <div class="current-weather__weather-container">
             <div class="current-weather__conditions">
-                <i class="current-weather__conditions-text current-weather__conditions-icon wi" :class="weatherConditions.icon"></i>
-                <p class="current-weather__conditions-text">{{ weatherConditions.description }}</p>
+                    <i class="current-weather__conditions-text current-weather__conditions-icon wi" :class="weatherConditions?.icon"></i>
+                    <p class="current-weather__conditions-text">{{ weatherConditions?.description }}</p>
             </div>
             <div class="current-weather__temperature">
                 <h2 class="current-weather__temperature-text">{{weather.current_weather.temperature}}</h2>
                 <p class="current-weather__temperature-unit">{{weather.daily_units.temperature_2m_min}}</p>
             </div>
             <div v-if="weather.daily" class="current-weather__data">
-                <div>
-                    <p class="current-weather__data-text">H: {{ `${weather.daily.temperature_2m_max[0]}${weather.daily_units.temperature_2m_max}` }}</p>
-                </div>
-                <div>
-                    <p class="current-weather__data-text">L: {{ `${weather.daily.temperature_2m_min[0]}${weather.daily_units.temperature_2m_min}` }}</p>
-                </div>
+                <p class="current-weather__data-text">H: {{ `${weather.daily.temperature_2m_max[0]}${weather.daily_units.temperature_2m_max}` }}</p>
+                <p class="current-weather__data-text">L: {{ `${weather.daily.temperature_2m_min[0]}${weather.daily_units.temperature_2m_min}` }}</p>
                 <p class="current-weather__data-text"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</p>
             </div>
         </div>
@@ -57,10 +51,11 @@ const { weatherConditions } = storeToRefs(weatherStore);
         }
 
         &__weather-container {
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
 
             @media (max-width: 767px) {
+                display: flex;
                 flex-direction: column;
             }
         }
@@ -73,29 +68,28 @@ const { weatherConditions } = storeToRefs(weatherStore);
 
         &__conditions,
         &__data {
-            width: 10rem;
+            box-sizing: content-box;
         }
 
         &__conditions {
             flex-direction: column;
             align-items: center;
-            justify-content: center;
 
-            height: 100%;
             padding: 1rem 0;
             padding-left: 6rem;
 
             @media (max-width: 767px) {
                 flex-direction: row;
+                justify-content: center;
                 padding-left: unset;
-                width: 95%;
+                width: 100%;
             }
         }
 
         &__conditions-text {
-            font-size: 1.5rem;
+            text-align: center;
+            font-size: 24px;
             font-weight: 500;
-            line-height: 2rem;
         }
 
         &__conditions-icon {
@@ -113,14 +107,13 @@ const { weatherConditions } = storeToRefs(weatherStore);
             align-items: center;
             justify-content: center;
 
-            height: 100%;
             margin: 0 2rem 1rem;
         }
 
         &__temperature-text {
             font-size: 5rem;
             font-weight: 500;
-            line-height: 5rem;
+            line-height: 4rem;
         }
 
         &__temperature-unit {
@@ -135,7 +128,7 @@ const { weatherConditions } = storeToRefs(weatherStore);
 
             height: 60%;
             padding: 1rem 0;
-
+            
             text-wrap: nowrap;
 
             @media (max-width: 767px) {
@@ -149,7 +142,9 @@ const { weatherConditions } = storeToRefs(weatherStore);
             font-weight: 500;
 
             @media (max-width: 767px) {
-                margin-right: 1rem;
+                &:not(:last-of-type) {
+                    margin-right: 1rem;
+                }
             }
         }
     }
