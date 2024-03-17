@@ -19,7 +19,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
         class="weather" 
         :class="weather?.current_weather.is_day ? 'weather--day' : 'weather--night'"
     >
-        <div class="weather__top-bar">
+        <div class="weather__top-bar" :class="{'weather__top-bar--day': weather?.current_weather.is_day}">
             <a href="/">
                 <h1>A Vue Weather App</h1>
             </a>
@@ -45,9 +45,9 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
     </div>
 </template>
 
+
 <style scoped lang="scss">
     .weather {
-
         height: 100vh;
         width: auto;
 
@@ -64,33 +64,30 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
             margin-bottom: 2rem;
             width: 100vw;
             height: 72px;
-            padding: 8px 60px;
+            padding: 8px 64px;
 
-            background: #0f406e;
-            box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(#1d104b, transparent);
 
             animation: fadein 0.5s;
+
+            &--day {
+                background: linear-gradient(#89c6ff, transparent);
+            }
 
             h1 {
                 font-weight: 500;
                 font-size: 24px;
                 color: #f8f8f8;
-                margin-right: 32px
             }
         }
 
         &__menu-button {
-            margin-left: 32px;
+            margin-left: 16px;
 
             height: 40px;
             width: 40px;
             border-radius: 16px;
             border: none;
-
-            
-            @media (max-width: 767px) {
-                margin-left: 16px;
-            }
         }
 
         &__container {
@@ -131,20 +128,21 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
     @media (max-width: 767px) {
         .weather__top-bar {
             padding: 1rem;
-        }
-
-        .weather__top-bar h1 {
-        display: none;
+            
+            h1 {
+                display: none;
+            }
         }
 
         .weather__search-bar {
-        width: 100%;
+            width: 100%;
         }
     }
 
     @media (min-width: 769px) {
         .weather__search-bar {
             flex-grow: 1;
+            margin-left: 16px
         }
     }
 

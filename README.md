@@ -1,6 +1,6 @@
 # VueWeatherApp
 
-A short project to learn Vue.js.
+A (not really) short project to learn Vue.js.
 
 ## Project Setup
 
@@ -11,5 +11,5 @@ yarn
 ## Starting the Server
 
 ```sh 
-yarn vite
+yarn dev
 ```

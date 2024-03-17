@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-    <div class="card" :class="{ 'card--full-width': fullWidth }">
+    <div class="grid-card" :class="{ 'grid-card--full-width': fullWidth }">
         <div class="card__title">
             <h3>{{ header }}</h3>
         </div>
@@ -15,14 +15,14 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-    .card {
+    .grid-card {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
 
         border-radius: 16px;
-        min-width: 192px;
-        min-height: 192px;
+        min-width: 208px;
+        min-height: 208px;
         padding: 1rem;
 
         background-color: #4464;
@@ -30,6 +30,8 @@ defineProps<{
         &__title {
             display: block;
             width: 100%;
+
+            font-size: 16px;
         }
 
         &--full-width {
@@ -42,6 +44,15 @@ defineProps<{
             @media (min-width: 1024px) {
                 width: auto;
             }
+        }
+
+        ::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #AAA2;
+            border-radius: 8px;
         }
     }
 </style>

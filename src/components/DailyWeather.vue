@@ -12,9 +12,9 @@ const { weather } = storeToRefs(weatherStore);
 </script>
 
 <template>
-    <GridItem v-if="weather.daily" header="10 Day Forecast" :full-width="true" class="daily-weather__container">
+    <GridItem v-if="weather.daily" header="14 Day Forecast" :full-width="true" class="daily-weather__container">
         <div class="daily-weather__list">
-            <div v-for="day in 10" :key=day class="daily-weather__list-item">
+            <div v-for="day in 14" :key=day class="daily-weather__list-item">
                 <p class="daily-weather__text">
                     {{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}
                 </p>
@@ -36,6 +36,7 @@ const { weather } = storeToRefs(weatherStore);
     .daily-weather {
         &__container {
             flex-direction: column;
+            margin-bottom: 16px;
         }
 
         &__icon {
@@ -47,9 +48,13 @@ const { weather } = storeToRefs(weatherStore);
             display: flex;
             flex-direction: row;
             align-items: center;
+            overflow-x: scroll;
 
-            overflow-x: auto;
-            width: 100%;
+            width: 848px;
+
+            @media (max-width: 768px) {
+                width: 100%;
+            }
         }
 
         &__list-item {
@@ -71,10 +76,6 @@ const { weather } = storeToRefs(weatherStore);
             &:last-of-type {
                 margin-right: 0;
             }
-
-            @media (min-width: 1024px) {
-                margin-bottom: 0;
-            }
         }
 
         &__title {
@@ -84,6 +85,7 @@ const { weather } = storeToRefs(weatherStore);
 
         &__text {
             font-size: 16px;
+            line-height: 24px;
         }
     }
 </style>

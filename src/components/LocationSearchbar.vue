@@ -91,10 +91,9 @@ const getWeatherByCoords = (location: any) => {
 
         background-color: #fff;
 
-        font-size: 1.2rem;
-
         &__input {
             border: none;
+            background-color: unset;
             height: 100%;
             width: 95%;
 
@@ -106,7 +105,6 @@ const getWeatherByCoords = (location: any) => {
             margin: auto;
             margin-right: 0;
             border: none;
-            border-radius: 100px;
             height: 100%;
 
             background-color: transparent;
@@ -115,18 +113,20 @@ const getWeatherByCoords = (location: any) => {
         &__list {
             position: absolute;
 
-            margin-top: 1rem;
+            margin-top: 16px;
             border-radius: 8px;
 
             background-color: white;
             color: #000;
+
+            overflow: hidden;
         }
 
         &__list-item {
             border-bottom: 1px solid #000;
             width: 100%;
             height: 100%;
-            padding: 0.5rem 1rem;
+            padding: 8px 16px;
 
             &:last-of-type {
                 border-bottom: none;
@@ -135,14 +135,6 @@ const getWeatherByCoords = (location: any) => {
             &:hover{
                 background-color: #ccc;
                 cursor: pointer;
-
-                &:first-of-type {
-                    border-radius: 8px 8px 0 0;
-                }
-
-                &:last-of-type {
-                    border-radius: 0 0 8px 8px;
-                }
             }
         }
     }
