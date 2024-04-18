@@ -6,7 +6,10 @@ defineProps<{
 </script>
 
 <template>
-    <div class="grid-card" :class="{ 'grid-card--full-width': fullWidth }">
+    <div
+        class="grid-card"
+        :class="{ 'grid-card--full-width': fullWidth }"
+    >
         <div class="card__title">
             <h3>{{ header }}</h3>
         </div>

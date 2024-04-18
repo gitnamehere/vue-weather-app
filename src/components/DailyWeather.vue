@@ -12,13 +12,25 @@ const { weather } = storeToRefs(weatherStore);
 </script>
 
 <template>
-    <GridItem v-if="weather.daily" header="14 Day Forecast" :full-width="true" class="daily-weather__container">
+    <GridItem
+        v-if="weather.daily"
+        header="14 Day Forecast"
+        :full-width="true"
+        class="daily-weather__container"
+    >
         <div class="daily-weather__list">
-            <div v-for="day in 14" :key=day class="daily-weather__list-item">
+            <div
+                v-for="day in 14"
+                :key="day"
+                class="daily-weather__list-item"
+            >
                 <p class="daily-weather__text">
                     {{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}
                 </p>
-                <i class="daily-weather__icon wi" :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"></i>
+                <i
+                    class="daily-weather__icon wi"
+                    :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"
+                />
                 <div>
                     <p class="daily-weather__text">
                         L: {{ `${weather.daily.temperature_2m_min[day-1]}${weather.daily_units.temperature_2m_min}` }}

@@ -9,22 +9,40 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 <template>
     <div class="current-weather">
         <div class="current-weather__location">
-            <h1>{{geocoding.name}} {{geocoding.admin1}}</h1>
-            <h2>{{geocoding.country}}</h2>
+            <h1>{{ geocoding.name }} {{ geocoding.admin1 }}</h1>
+            <h2>{{ geocoding.country }}</h2>
         </div>
         <div class="current-weather__weather-container">
             <div class="current-weather__conditions">
-                    <i class="current-weather__conditions-text current-weather__conditions-icon wi" :class="weatherConditions?.icon"></i>
-                    <p class="current-weather__conditions-text">{{ weatherConditions?.description }}</p>
+                <i
+                    class="current-weather__conditions-text current-weather__conditions-icon wi"
+                    :class="weatherConditions?.icon"
+                />
+                <p class="current-weather__conditions-text">
+                    {{ weatherConditions?.description }}
+                </p>
             </div>
             <div class="current-weather__temperature">
-                <h2 class="current-weather__temperature-text">{{weather.current_weather.temperature}}</h2>
-                <p class="current-weather__temperature-unit">{{weather.daily_units.temperature_2m_min}}</p>
+                <h2 class="current-weather__temperature-text">
+                    {{ weather.current_weather.temperature }}
+                </h2>
+                <p class="current-weather__temperature-unit">
+                    {{ weather.daily_units.temperature_2m_min }}
+                </p>
             </div>
-            <div v-if="weather.daily" class="current-weather__data">
-                <p class="current-weather__data-text">H: {{ `${weather.daily.temperature_2m_max[0]}${weather.daily_units.temperature_2m_max}` }}</p>
-                <p class="current-weather__data-text">L: {{ `${weather.daily.temperature_2m_min[0]}${weather.daily_units.temperature_2m_min}` }}</p>
-                <p class="current-weather__data-text"><font-awesome-icon :icon="['fas', 'wind']" />: {{weather.current_weather.windspeed}}mph {{weather.current_weather.winddirection}}°</p>
+            <div
+                v-if="weather.daily"
+                class="current-weather__data"
+            >
+                <p class="current-weather__data-text">
+                    H: {{ `${weather.daily.temperature_2m_max[0]}${weather.daily_units.temperature_2m_max}` }}
+                </p>
+                <p class="current-weather__data-text">
+                    L: {{ `${weather.daily.temperature_2m_min[0]}${weather.daily_units.temperature_2m_min}` }}
+                </p>
+                <p class="current-weather__data-text">
+                    <font-awesome-icon :icon="['fas', 'wind']" />: {{ weather.current_weather.windspeed }}mph {{ weather.current_weather.winddirection }}°
+                </p>
             </div>
         </div>
     </div>

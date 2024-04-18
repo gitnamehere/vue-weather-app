@@ -19,32 +19,46 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
         class="weather" 
         :class="weather?.current_weather.is_day ? 'weather--day' : 'weather--night'"
     >
-        <div class="weather__top-bar" :class="{'weather__top-bar--day': weather?.current_weather.is_day}">
+        <div
+            class="weather__top-bar"
+            :class="{'weather__top-bar--day': weather?.current_weather.is_day}"
+        >
             <a href="/">
                 <h1>A Vue Weather App</h1>
             </a>
             <Searchbar class="weather__search-bar" />
-            <button class="weather__menu-button" @click="weatherStore.toggleTemperatureUnit">
-                {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? 'F' : 'C'}}
+            <button
+                class="weather__menu-button"
+                @click="weatherStore.toggleTemperatureUnit"
+            >
+                {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? 'F' : 'C' }}
             </button>
         </div>
 
-        <div v-if="weather" class="weather__container">
+        <div
+            v-if="weather"
+            class="weather__container"
+        >
             <CurrentWeather />
             <DailyWeather />
         </div>
 
-        <div v-else class="weather__container">
+        <div
+            v-else
+            class="weather__container"
+        >
             <h1>404 Not Found</h1>
             <p>This means you either reloaded the page, the location you searched could not be found, or an error occured.</p>
         </div>
         <footer class="footer">
             <p>This is the weather page. (under development)</p>
-            <a href="https://open-meteo.com/" style="color: #f8f8f8;"><u>Weather data by Open-Meteo.com</u></a>
+            <a
+                href="https://open-meteo.com/"
+                style="color: #f8f8f8;"
+            ><u>Weather data by Open-Meteo.com</u></a>
         </footer>
     </div>
 </template>
-
 
 <style scoped lang="scss">
     .weather {
