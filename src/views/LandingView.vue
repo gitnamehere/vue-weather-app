@@ -42,6 +42,10 @@ import Searchbar from '@/components/LocationSearchbar.vue';
         &__search-bar {
             margin-top: 1rem;
             width: 50%;
+
+            @media (max-width: 767px) {
+                width: 95%
+            }
         }
     }
 </style>
