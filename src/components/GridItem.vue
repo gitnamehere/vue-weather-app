@@ -10,7 +10,7 @@ defineProps<{
         class="grid-card"
         :class="{ 'grid-card--full-width': fullWidth }"
     >
-        <div class="card__title">
+        <div class="grid-card__title">
             <h3>{{ header }}</h3>
         </div>
         <slot />
