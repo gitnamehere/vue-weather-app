@@ -18,7 +18,7 @@ const getLocations = () => {
     timer = setTimeout(() => {
         weatherStore.getLocations(location.value);
         locationsSearched.value = true;
-    }, 750);
+    }, 500);
 }
 
 const getWeather = () => {
