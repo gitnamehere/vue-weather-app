@@ -28,10 +28,10 @@ defineProps<{
         min-width: 160px;
         min-height: 160px;
         padding: 16px;
-        background-color: #4464;
+        background-color: #6683;
 
         &--hollow {
-            border: 4px solid #FFF2;
+            border: 2px solid #FFF2;
             padding: 12px;
 
             background-color: unset;

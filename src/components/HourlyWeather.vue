@@ -90,7 +90,7 @@ const hourlyWeather = computed(() => {
             min-width: 80px;
             width: 80px;
 
-            border: 4px solid #FFF2;
+            border: 2px solid #FFF2;
             border-radius: 8px;
             box-sizing: border-box;
 
