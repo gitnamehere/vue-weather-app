@@ -6,7 +6,7 @@ import { TemperatureUnits } from '@/utils/constants';
 import Searchbar from '@/components/LocationSearchbar.vue';
 import CurrentWeather from '@/components/CurrentWeather.vue'
 import DailyWeather from '@/components/DailyWeather.vue';
-
+import HourlyWeather from '@/components/HourlyWeather.vue';
 const weatherStore = useWeatherStore();
 
 const { weather, temperatureUnit } = storeToRefs(weatherStore);
@@ -40,6 +40,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
             class="weather__container"
         >
             <CurrentWeather />
+            <HourlyWeather />
             <DailyWeather />
         </div>
 

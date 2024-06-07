@@ -24,8 +24,8 @@ defineProps<{
         box-sizing: border-box;
 
         border-radius: 16px;
-        min-width: 208px;
-        min-height: 208px;
+        min-width: 160px;
+        min-height: 160px;
         padding: 1rem;
 
         background-color: #4464;
