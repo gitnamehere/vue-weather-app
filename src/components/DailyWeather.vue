@@ -16,6 +16,7 @@ const { weather } = storeToRefs(weatherStore);
         v-if="weather.daily"
         header="14 Day Forecast"
         :full-width="true"
+        :hollow="true"
         class="daily-weather__container"
     >
         <div class="daily-weather__list">

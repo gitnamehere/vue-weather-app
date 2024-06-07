@@ -65,10 +65,11 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
     .weather {
         display: flex;
         justify-content: center;
+        flex-direction: column;
         height: 100%;
         width: 100%;
 
-        padding: 96px 0;
+        padding: 96px 0 16px;
 
         color: #f8f8f8;
         text-shadow:  0px 2px 8px #0004;
@@ -132,17 +133,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
     }
 
     .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        width: 100vw;
-        margin-bottom: 2rem;
-
+        padding-top: 16px;
         text-align: center;
     }
 
