@@ -27,7 +27,6 @@ defineProps<{
         min-width: 160px;
         min-height: 160px;
         padding: 1rem;
-
         background-color: #4464;
 
         &__title {
@@ -54,7 +53,7 @@ defineProps<{
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #AAA2;
+            background: #FFF2;
             border-radius: 8px;
         }
     }

@@ -85,12 +85,14 @@ const hourlyWeather = computed(() => {
             flex-direction: column;
             align-items: center;
 
-            margin: 8px;
+            margin: 8px 4px;
             padding: 4px 0;
             min-width: 80px;
+            width: 80px;
 
-            background-color: #AAA2;
+            border: 4px solid #FFF2;
             border-radius: 8px;
+            box-sizing: border-box;
 
             &:first-of-type {
                 margin-left: 0;
