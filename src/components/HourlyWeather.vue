@@ -21,7 +21,7 @@ const hourlyWeather = computed(() => {
         organizedHourly.push({
             icon,
             temperature: hourly.temperature_2m[i + currentHour],
-            time: new Date(hourly.time[i + currentHour]).toLocaleTimeString([], { hour: "numeric", minute: "numeric" })
+            time: new Date(hourly.time[i + currentHour]).toLocaleTimeString([], { hour: "numeric" })
         })
     }
 
