@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 import { parseWeatherCode } from '@/utils/weatherCodes';
 
-import GridItem from '@/components/GridItem.vue';
+import GridItem from '@/components/grid/GridItem.vue';
 
 const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
