@@ -69,7 +69,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
         display: flex;
         flex-direction: column;
         height: 100%;
-        width: 100%;
+        width: calc(100vw - (100vw - 100%)); // subtract viewport by scrollbar width
 
         padding: 96px 0 16px;
 
@@ -77,6 +77,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
         text-shadow: 0px 2px 8px #0004;
 
         animation: fadein 0.5s;
+        transition: background-color 0.25s ease;
 
         &__top-bar {
             display: flex;
@@ -91,7 +92,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
 
             background: linear-gradient(#1d104b, transparent);
 
-            animation: fadein 0.5s;
+            animation: all 0.5s ease;
 
             &--day {
                 background: linear-gradient(#89c6ff, #2885dd, transparent);
