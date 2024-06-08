@@ -16,11 +16,11 @@ const hourlyWeather = computed(() => {
     let organizedHourly = [];
 
     for (let i = 0; i < 24; i++) {
-        let { icon } = parseWeatherCode({code: hourly.weather_code[i + currentHour]});
+        let { icon } = parseWeatherCode({code: hourly.weather_code[i + currentHour], isDay: hourly.is_day[i + currentHour]});
 
         organizedHourly.push({
             icon,
-            temperature: hourly.temperature_2m[i + currentHour],
+            temperature: Math.round(hourly.temperature_2m[i + currentHour]),
             time: new Date(hourly.time[i + currentHour]).toLocaleTimeString([], { hour: "numeric" })
         })
     }
@@ -32,7 +32,7 @@ const hourlyWeather = computed(() => {
 <template>
     <GridItem
         v-if="weather.hourly"
-        header="Hourly Forcast"
+        header="Hourly Forecast"
         :full-width="true"
         class="hourly-weather__container"
     >
@@ -88,11 +88,10 @@ const hourlyWeather = computed(() => {
             margin: 8px 4px;
             padding: 4px 0;
             min-width: 80px;
-            width: 80px;
+            height: 112px;
 
             border: 2px solid #FFF2;
             border-radius: 8px;
-            box-sizing: border-box;
 
             &:first-of-type {
                 margin-left: 0;
