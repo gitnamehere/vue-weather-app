@@ -34,10 +34,7 @@ const { weather } = storeToRefs(weatherStore);
                 />
                 <div>
                     <p class="daily-weather__text">
-                        L: {{ `${weather.daily.temperature_2m_min[day-1]}${weather.daily_units.temperature_2m_min}` }}
-                    </p>
-                    <p class="daily-weather__text">
-                        H: {{ `${weather.daily.temperature_2m_max[day-1]}${weather.daily_units.temperature_2m_max}` }}
+                        {{ `${Math.round(weather.daily.temperature_2m_min[day-1])}° - ${Math.round(weather.daily.temperature_2m_max[day-1])}°` }}
                     </p>
                 </div>
             </div>
@@ -71,9 +68,10 @@ const { weather } = storeToRefs(weatherStore);
             flex-direction: column;
             align-items: center;
 
-            margin: 8px;
+            margin: 8px 4px;
             padding: 4px 0;
             min-width: 80px;
+            height: 112px;
 
             background-color: #AAA2;
             border-radius: 8px;
