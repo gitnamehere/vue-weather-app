@@ -45,7 +45,7 @@ defineProps<{
             }
 
             @media (min-width: 1024px) {
-                width: 900px;
+                width: 960px;
             }
         }
 
