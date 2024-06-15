@@ -11,17 +11,14 @@ const { weather } = storeToRefs(weatherStore);
 
 // format hourly into an array of objects
 const hourlyWeather = computed(() => {
-    let { hourly, current_weather } = weather.value;
-    let currentHour: number = new Date(current_weather.time).getHours();
+    let { hourly } = weather.value;
     let organizedHourly = [];
 
     for (let i = 0; i < 24; i++) {
-        let { icon } = parseWeatherCode({code: hourly.weather_code[i + currentHour], isDay: hourly.is_day[i + currentHour]});
-
         organizedHourly.push({
-            icon,
-            temperature: Math.round(hourly.temperature_2m[i + currentHour]),
-            time: new Date(hourly.time[i + currentHour]).toLocaleTimeString([], { hour: "numeric" })
+            icon: parseWeatherCode({code: hourly.weather_code[i], isDay: hourly.is_day[i]}).icon,
+            temperature: Math.round(hourly.temperature_2m[i]),
+            time: new Date(hourly.time[i]).toLocaleTimeString([], { hour: "numeric" })
         })
     }
 

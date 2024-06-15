@@ -75,7 +75,8 @@ export const useWeatherStore = defineStore('weather', () => {
       `&windspeed_unit=mph` + 
       `&precipitation_unit=inch` +
       `&timezone=auto` +
-      `&forecast_days=14`;
+      `&forecast_days=14` + 
+      `&forecast_hours=24`;
 
     axios
       .get(requestUrl)
