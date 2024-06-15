@@ -24,6 +24,7 @@ function toggleCollapsed() {
         <div class="grid-card__header">
             <h3>{{ header }}</h3>
             <div
+                v-if="collapsible"
                 class="grid-card__header-button"
                 @click="toggleCollapsed"
             >
