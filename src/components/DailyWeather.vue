@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 import { parseWeatherCode } from '@/utils/weatherCodes';
@@ -9,6 +10,23 @@ const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const weatherStore = useWeatherStore();
 const { weather } = storeToRefs(weatherStore);
+
+// format daily into an array of objects
+const dailyWeather = computed(() => {
+    let { daily } = weather.value;
+    let organizedDaily = [];
+
+    for (let i = 0; i < 14; i++) {
+        organizedDaily.push({
+            day: daysOfTheWeek[new Date(daily.time[i]).getUTCDay()],
+            icon: parseWeatherCode({code: daily.weathercode[i]}).icon,
+            minTemperature: Math.round(daily.temperature_2m_min[i]),
+            maxTemperature: Math.round(daily.temperature_2m_max[i]),
+        })
+    }
+
+    return organizedDaily;
+})
 </script>
 
 <template>
@@ -21,20 +39,20 @@ const { weather } = storeToRefs(weatherStore);
     >
         <div class="daily-weather__list">
             <div
-                v-for="day in 14"
-                :key="day"
+                v-for="(day, i) in dailyWeather"
+                :key="i"
                 class="daily-weather__list-item"
             >
                 <p class="daily-weather__text">
-                    {{ day == 1 ? "Today" : daysOfTheWeek[new Date(weather.daily.time[day-1]).getUTCDay()] }}
+                    {{ i == 0 ? "Today" : day.day }}
                 </p>
                 <i
                     class="daily-weather__icon wi"
-                    :class="parseWeatherCode({ code: weather.daily.weathercode[day-1] }).icon"
+                    :class="day.icon"
                 />
                 <div>
                     <p class="daily-weather__text">
-                        {{ `${Math.round(weather.daily.temperature_2m_min[day-1])}° - ${Math.round(weather.daily.temperature_2m_max[day-1])}°` }}
+                        {{ `${day.minTemperature}° - ${day.maxTemperature}°` }}
                     </p>
                 </div>
             </div>
