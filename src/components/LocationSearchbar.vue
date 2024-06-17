@@ -58,7 +58,7 @@ const getWeatherByCoords = (location: any) => {
             >
                 <font-awesome-icon 
                     :icon="['fas', 'magnifying-glass']" 
-                    style="color: #282;" 
+                    style="color: #2885dd;" 
                     size="xl"
                 />
             </button>
