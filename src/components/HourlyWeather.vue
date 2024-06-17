@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weather';
 import { parseWeatherCode } from '@/utils/weatherCodes';
 
-import GridItem from '@/components/grid/GridItem.vue';
+import CardItem from '@/components/CardItem.vue';
 
 const weatherStore = useWeatherStore();
 const { weather } = storeToRefs(weatherStore);
@@ -27,7 +27,7 @@ const hourlyWeather = computed(() => {
 </script>
 
 <template>
-    <GridItem
+    <CardItem
         v-if="weather.hourly"
         header="Hourly Forecast"
         :full-width="true"
@@ -53,7 +53,7 @@ const hourlyWeather = computed(() => {
                 </div>
             </div>
         </div>
-    </GridItem>
+    </CardItem>
 </template>
 
 <style scoped lang="scss">
@@ -109,4 +109,4 @@ const hourlyWeather = computed(() => {
             line-height: 24px;
         }
     }
-</style>
+</style>@/components/CardItem.vue

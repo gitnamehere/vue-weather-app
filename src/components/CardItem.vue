@@ -18,27 +18,27 @@ function toggleCollapsed() {
 
 <template>
     <div
-        class="grid-card"
-        :class="{ 'grid-card--full-width': fullWidth, 'grid-card--hollow': hollow }"
+        class="card"
+        :class="{ 'card--full-width': fullWidth, 'card--hollow': hollow }"
     >
-        <div class="grid-card__header">
+        <div class="card__header">
             <h3>{{ header }}</h3>
             <div
                 v-if="collapsible"
-                class="grid-card__header-button"
+                class="card__header-button"
                 @click="toggleCollapsed"
             >
                 {{ collapsed ? "+" : "-" }}
             </div>
         </div>
-        <Transition name="grid-card__collapse">
+        <Transition name="card__collapse">
             <slot v-if="!collapsed" />
         </Transition>
     </div>
 </template>
 
 <style scoped lang="scss">
-    .grid-card {
+    .card {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
