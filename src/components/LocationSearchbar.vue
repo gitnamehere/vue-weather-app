@@ -22,6 +22,8 @@ const getLocations = () => {
 }
 
 const getWeather = () => {
+    if (!location.value) return;
+
     clearTimeout(timer);
     locationsSearched.value = false;
     weatherStore.setLocation(location.value);
