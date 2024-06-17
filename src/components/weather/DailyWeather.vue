@@ -113,4 +113,4 @@ const dailyWeather = computed(() => {
             line-height: 24px;
         }
     }
-</style>@/components/CardItem.vue
+</style>
