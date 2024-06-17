@@ -2,10 +2,11 @@
 import { ref } from 'vue';
 
 defineProps<{
-    header: string
-    fullWidth?: boolean
-    hollow?: boolean
-    collapsible?: boolean
+    header: string;
+    collapsible?: boolean;
+    fullWidth?: boolean;
+    hollow?: boolean;
+    square?: boolean;
 }>();
 
 const collapsed = ref(false);
@@ -19,7 +20,7 @@ function toggleCollapsed() {
 <template>
     <div
         class="card"
-        :class="{ 'card--full-width': fullWidth, 'card--hollow': hollow }"
+        :class="{ 'card--full-width': fullWidth, 'card--hollow': hollow, 'card--square': square }"
     >
         <div class="card__header">
             <h3>{{ header }}</h3>
@@ -60,12 +61,16 @@ function toggleCollapsed() {
             width: 100%;
                     
             @media (min-width: 768px) {
-                width: 640px;
+                width: 716px;
             }
 
             @media (min-width: 1024px) {
                 width: 960px;
             }
+        }
+
+        &--square {
+            aspect-ratio: 1;
         }
 
         &__header {
