@@ -4,9 +4,10 @@ import { useWeatherStore } from '@/stores/weather';
 import { TemperatureUnits } from '@/utils/constants';
 
 import Searchbar from '@/components/LocationSearchbar.vue';
-import CurrentWeather from '@/components/CurrentWeather.vue';
-import DailyWeather from '@/components/DailyWeather.vue';
-import HourlyWeather from '@/components/HourlyWeather.vue';
+import CurrentWeather from '@/components/weather/CurrentWeather.vue';
+import DailyWeather from '@/components/weather/DailyWeather.vue';
+import HourlyWeather from '@/components/weather/HourlyWeather.vue';
+import GridContainer from '@/components/grid/GridContainer.vue';
 const weatherStore = useWeatherStore();
 
 const { weather, temperatureUnit } = storeToRefs(weatherStore);
