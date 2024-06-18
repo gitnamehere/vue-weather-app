@@ -72,7 +72,7 @@ export const useWeatherStore = defineStore('weather', () => {
       `&hourly=temperature_2m,weather_code,is_day` + 
       `&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
       `&temperature_unit=${temperatureUnit.value}` +
-      `&windspeed_unit=mph` + 
+      `&wind_speed_unit=mph` + 
       `&precipitation_unit=inch` +
       `&timezone=auto` +
       `&forecast_days=14` + 

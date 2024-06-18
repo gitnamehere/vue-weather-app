@@ -29,9 +29,5 @@ defineProps<{
             flex-direction: column;
             height: 100%;
         }
-
-        &__indicator {
-            font-size: 300%;
-        }
     }
 </style>
