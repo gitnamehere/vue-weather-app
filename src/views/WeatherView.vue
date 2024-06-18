@@ -7,6 +7,7 @@ import Searchbar from '@/components/LocationSearchbar.vue';
 import CurrentWeather from '@/components/weather/CurrentWeather.vue';
 import DailyWeather from '@/components/weather/DailyWeather.vue';
 import HourlyWeather from '@/components/weather/HourlyWeather.vue';
+import WeatherGrid from '@/components/weather/WeatherGrid.vue';
 const weatherStore = useWeatherStore();
 
 const { weather, temperatureUnit } = storeToRefs(weatherStore);
@@ -39,6 +40,7 @@ const { weather, temperatureUnit } = storeToRefs(weatherStore);
         >
             <CurrentWeather />
             <HourlyWeather />
+            <WeatherGrid />
             <DailyWeather />
         </div>
 
