@@ -12,6 +12,8 @@ const weatherStore = useWeatherStore();
 const { weather } = storeToRefs(weatherStore);
 </script>
 
+<!-- the CardItems are just placeholders, which will be populated in the future -->
+
 <template>
     <GridContainer class="weather-grid">
         <WindCard
@@ -20,18 +22,18 @@ const { weather } = storeToRefs(weatherStore);
             :speed="weather.current.wind_speed_10m"
             :unit="weather.current_units.wind_speed_10m"
         />
+        <CardItem
+            class="weather-grid__grid-item"
+            header=""
+            :square="true"
+        />
         <HumidityCard
             class="weather-grid__grid-item"
             :humidity="weather.current.relative_humidity_2m"
         />
         <CardItem
             class="weather-grid__grid-item"
-            header="Placeholder"
-            :square="true"
-        />
-        <CardItem
-            class="weather-grid__grid-item"
-            header="Placeholder"
+            header=""
             :square="true"
         />
     </GridContainer>
@@ -47,13 +49,17 @@ const { weather } = storeToRefs(weatherStore);
 
             @media (max-width: 767px) {
                 &:nth-child(even) {
-                    grid-row: 2;
+                    // grid-row: 2;
+
+                    display: none; // temporary
                 }
             }
 
             @media (max-width: 1024px) {
                 &:nth-child(4) {
-                    grid-row: 2;
+                    // grid-row: 2;
+
+                    display: none; // temporary
                 }
             }
         }
