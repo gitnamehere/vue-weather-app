@@ -45,7 +45,7 @@ function toggleCollapsed() {
         box-sizing: border-box;
 
         border-radius: 16px;
-        min-width: 160px;
+        min-width: 152px;
         min-height: 24px;
         padding: 16px;
         background-color: #3382;
