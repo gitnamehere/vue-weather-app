@@ -46,7 +46,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
                     L: {{ `${weather.daily.temperature_2m_min[0]}${weather.daily_units.temperature_2m_min}` }}
                 </p>
                 <p class="current-weather__data-text">
-                    <font-awesome-icon :icon="['fas', 'wind']" />: {{ weather.current.wind_speed_10m }}mph {{ weather.current.wind_direction_10m }}°
+                    Feels Like: {{ `${weather.current.apparent_temperature}${weather.daily_units.temperature_2m_min}` }}
                 </p>
             </div>
         </div>
