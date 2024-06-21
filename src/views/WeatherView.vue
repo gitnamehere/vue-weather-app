@@ -35,7 +35,6 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
                 {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? 'F' : 'C' }}
             </button>
         </div>
-
         <div
             v-if="weather?.current"
             class="weather__container"
@@ -45,7 +44,6 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
             <WeatherGrid />
             <DailyWeather />
         </div>
-
         <div
             v-else
             class="weather__container"
@@ -58,10 +56,7 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
         </div>
         <footer class="weather__footer">
             <p>This is the weather page. (under development)</p>
-            <a
-                href="https://open-meteo.com/"
-                style="color: #f8f8f8"
-            >
+            <a href="https://open-meteo.com/">
                 <u>Weather data by Open-Meteo.com</u>
             </a>
         </footer>
@@ -128,7 +123,7 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
             width: 100%;
 
             @media (max-width: 767px) {
-                padding: 0 2rem;
+                padding: 0 16px;
             }
         }
 
@@ -148,7 +143,7 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
 
     @media (max-width: 767px) {
         .weather__top-bar {
-            padding: 1rem;
+            padding: 16px;
 
             h1 {
                 display: none;
