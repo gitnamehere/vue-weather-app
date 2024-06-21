@@ -36,9 +36,10 @@ defineProps<{
         }
 
         &__raindrop {
-            height: 50%;
+            margin: 8px;
+            height: 42%;
+            max-height: 64px;
             width: 50%;
-            margin: 8px auto;
         }
     }
 </style>
