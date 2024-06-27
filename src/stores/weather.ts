@@ -17,6 +17,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const weather = ref();
   const weatherConditions = ref<WeatherConditions>(); // This will be a JSON object for the current weather conditions, using parseWeatherCode()
   const locations = ref();
+  const error = ref(false);
 
   const toggleTemperatureUnit = () => {
     temperatureUnit.value = temperatureUnit.value === TemperatureUnits.FAHRENHEIT
@@ -42,6 +43,7 @@ export const useWeatherStore = defineStore('weather', () => {
   };
 
   const getWeather = async () => {
+    error.value = false;
     axios
       .get(`${GEOCODING_API_URL}search?name=${location.value}&count=1&language=en&format=json`)
       .then((res) => {
@@ -54,10 +56,12 @@ export const useWeatherStore = defineStore('weather', () => {
         console.log(err);
         geocoding.value = {};
         weather.value = {};
+        error.value = true;
       })
     };
 
   const getWeatherFromGeocoding = (location: any) => {
+    error.value = false;
     longitude.value = location.longitude;
     latitude.value = location.latitude;
     geocoding.value = location;
@@ -87,6 +91,7 @@ export const useWeatherStore = defineStore('weather', () => {
       })
       .catch((err) => {
         console.log(err);
+        error.value = true;
       });
   };
 
@@ -104,6 +109,7 @@ export const useWeatherStore = defineStore('weather', () => {
     getWeatherFromGeocoding,
     getLocations,
     fetchWeatherData,
-    setLocation
+    setLocation,
+    error,
   }
 })

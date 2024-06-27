@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
+
 import { useWeatherStore } from '@/stores/weather';
 import { TemperatureUnits } from '@/utils/constants';
 
@@ -10,9 +13,26 @@ import HourlyWeather from '@/components/weather/HourlyWeather.vue';
 import WeatherGrid from '@/components/weather/WeatherGrid.vue';
 
 const weatherStore = useWeatherStore();
-const { weather, temperatureUnit } = storeToRefs(weatherStore);
+const { error, temperatureUnit, weather } = storeToRefs(weatherStore);
 
-window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading somewhere in the middle of the page on mobile devices
+const route = useRoute();
+
+function getRouteFromParams() {
+    // route.params.location has a type of <string | string[]>, so convert the string (most likely not a string array here)
+    // into a string so that ts doesn't yell at me
+    const location = route.params.location.toString();
+
+    if (!location) return;
+
+    weatherStore.setLocation(location);
+    weatherStore.getWeather();
+}
+
+onMounted(() => {
+    window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading somewhere in the middle of the page on mobile devices
+
+    getRouteFromParams();
+})
 </script>
 
 <template>
@@ -48,11 +68,12 @@ window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading 
             v-else
             class="weather__container"
         >
-            <h1>Not Found</h1>
-            <p>
-                This means you either reloaded the page, the location you searched could not be found, or an
-                error occured.
-            </p>
+            <h1 v-if="error">
+                Cannot find location
+            </h1>
+            <h1 v-else>
+                Loading...
+            </h1>
         </div>
         <footer class="weather__footer">
             <p>This is the weather page. (under development)</p>
