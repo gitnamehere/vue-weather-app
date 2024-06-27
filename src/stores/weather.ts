@@ -9,7 +9,6 @@ import { API_URL, GEOCODING_API_URL, TemperatureUnits } from '@/utils/constants'
 // create weather store with setup syntax
 export const useWeatherStore = defineStore('weather', () => {
   // state
-  const location = ref("");
   const longitude = ref();
   const latitude = ref();
   const temperatureUnit = ref<TemperatureUnits>(TemperatureUnits.FAHRENHEIT);
@@ -27,10 +26,6 @@ export const useWeatherStore = defineStore('weather', () => {
     if (weather.value) fetchWeatherData(latitude.value, longitude.value);
   }
 
-  const setLocation = (locationSearch: string) => {
-    location.value = locationSearch;
-  };
-
   const getLocations = async (locationSearch: string) => {
     axios
       .get(`${GEOCODING_API_URL}search?name=${locationSearch}&count=10&language=en&format=json`)
@@ -42,10 +37,10 @@ export const useWeatherStore = defineStore('weather', () => {
       });
   };
 
-  const getWeather = async () => {
+  const getWeatherByName = async (location: string) => {
     error.value = false;
     axios
-      .get(`${GEOCODING_API_URL}search?name=${location.value}&count=1&language=en&format=json`)
+      .get(`${GEOCODING_API_URL}search?name=${location}&count=1&language=en&format=json`)
       .then((res) => {
         longitude.value = res.data.results[0].longitude;
         latitude.value = res.data.results[0].latitude;
@@ -105,11 +100,10 @@ export const useWeatherStore = defineStore('weather', () => {
     geocoding,
     weatherConditions,
     toggleTemperatureUnit,
-    getWeather,
+    getWeatherByName,
     getWeatherFromGeocoding,
     getLocations,
     fetchWeatherData,
-    setLocation,
     error,
   }
 })

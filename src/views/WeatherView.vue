@@ -24,8 +24,7 @@ function getRouteFromParams() {
 
     if (!location) return;
 
-    weatherStore.setLocation(location);
-    weatherStore.getWeather();
+    weatherStore.getWeatherByName(location);
 }
 
 onMounted(() => {

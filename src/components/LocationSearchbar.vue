@@ -26,8 +26,7 @@ const getWeather = () => {
 
     clearTimeout(timer);
     locationsSearched.value = false;
-    weatherStore.setLocation(location.value);
-    weatherStore.getWeather();
+    weatherStore.getWeatherByName(location.value);
     router.push({
         name: "weather",
         params: {
