@@ -26,7 +26,7 @@ export const useWeatherStore = defineStore('weather', () => {
     if (weather.value) fetchWeatherData(latitude.value, longitude.value);
   }
 
-  const getLocations = async (locationSearch: string) => {
+  const getLocations = (locationSearch: string) => {
     axios
       .get(`${GEOCODING_API_URL}search?name=${locationSearch}&count=10&language=en&format=json`)
       .then((res) => {
@@ -37,7 +37,7 @@ export const useWeatherStore = defineStore('weather', () => {
       });
   };
 
-  const getWeatherByName = async (location: string) => {
+  const getWeatherByName = (location: string) => {
     error.value = false;
     axios
       .get(`${GEOCODING_API_URL}search?name=${location}&count=1&language=en&format=json`)
