@@ -67,11 +67,17 @@ onMounted(() => {
             v-else
             class="weather__container"
         >
-            <h1 v-if="error">
-                Cannot find location
+            <template v-if="error">
+                <h1>Cannot fetch weather data</h1>
+                <p>
+                    The location you searched for doesn't exist, or an error occured
+                </p>
+            </template>
+            <h1 v-else-if="route.params.location">
+                Loading...
             </h1>
             <h1 v-else>
-                Loading...
+                Enter in a location to get weather data
             </h1>
         </div>
         <footer class="weather__footer">
