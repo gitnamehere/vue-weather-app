@@ -31,6 +31,7 @@ onMounted(() => {
     window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading somewhere in the middle of the page on mobile devices
 
     getRouteFromParams();
+    console.log(window.innerWidth);
 })
 </script>
 
@@ -98,13 +99,28 @@ onMounted(() => {
         width: calc(100vw - (100vw - 100%)); // subtract viewport by scrollbar width
         min-height: 100vh;
 
-        padding: 96px 0 16px;
+        padding: 80px 0 16px;
 
         color: #f8f8f8;
         text-shadow: 0px 2px 8px #0004;
 
         animation: fadein 0.5s;
         transition: background-color 0.25s ease;
+
+        @media (min-width: 768px) {
+            padding-top: 96px;
+        }
+
+        &__search-bar {
+            width: 100%;
+
+            @media (min-width: 768px) {
+                flex-grow: 1;
+                width: unset;
+                margin-left: 16px;
+            }
+        }
+
 
         &__top-bar {
             display: flex;
@@ -123,6 +139,14 @@ onMounted(() => {
 
             &--day {
                 background: linear-gradient(#89c6ff, #2885dd, transparent);
+            }
+
+            @media (max-width: 767px) {
+                padding: 16px;
+
+                h1 {
+                    display: none;
+                }
             }
 
             h1 {
@@ -164,27 +188,6 @@ onMounted(() => {
         &__footer {
             padding-top: 16px;
             text-align: center;
-        }
-    }
-
-    @media (max-width: 767px) {
-        .weather__top-bar {
-            padding: 16px;
-
-            h1 {
-                display: none;
-            }
-        }
-
-        .weather__search-bar {
-            width: 100%;
-        }
-    }
-
-    @media (min-width: 769px) {
-        .weather__search-bar {
-            flex-grow: 1;
-            margin-left: 16px;
         }
     }
 
