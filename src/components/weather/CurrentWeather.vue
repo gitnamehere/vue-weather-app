@@ -12,8 +12,8 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         class="current-weather"
     >
         <div class="current-weather__location">
-            <h1>{{ geocoding.name }}{{ geocoding.admin1 ? `, ${geocoding.admin1}` : "" }}</h1>
-            <h2>{{ geocoding.country }}</h2>
+            <h1 class="current-weather__location-name">{{ geocoding.name }}{{ geocoding.admin1 ? `, ${geocoding.admin1}` : "" }}</h1>
+            <h2 class="current-weather__location-country">{{ geocoding.country }}</h2>
         </div>
         <div
             class="current-weather__weather-container"
@@ -61,16 +61,36 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         justify-content: center;
 
         width: 80%;
-        margin-bottom: 2rem;
+        margin-bottom: 32px;
+
+        @media (max-width: 768px) {
+            margin-bottom: 16px;
+        };
 
         &__location {
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            margin-bottom: 1rem;
+            margin-bottom: 16px;
 
             text-align: center;
+
+            @media (max-width: 767px) {
+                margin-bottom: 8px;
+            };
+
+            &-name {
+                @media (max-width: 767px) {
+                    font-size: 24px;
+                };
+            }
+
+            &-country {
+                @media (max-width: 767px) {
+                    font-size: 16px;
+                };
+            }
         }
 
         &__weather-container {
@@ -119,8 +139,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             font-size: 2rem;
 
             @media (max-width: 767px) {
-                margin-right: 1rem;
-                font-size: 3rem;
+                margin-right: 8px;
             }
         }
 
@@ -130,13 +149,21 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             align-items: center;
             justify-content: center;
 
-            margin: 0 2rem 1rem;
+            margin: 0 32px;
+
+            @media (min-width: 768px) {
+                margin-bottom: 16px;
+            }
         }
 
         &__temperature-text {
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 500;
             line-height: 4rem;
+
+            @media (min-width: 768px) {
+                font-size: 5rem;
+            }
         }
 
         &__temperature-unit {
