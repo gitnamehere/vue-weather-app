@@ -12,8 +12,12 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         class="current-weather"
     >
         <div class="current-weather__location">
-            <h1 class="current-weather__location-name">{{ geocoding.name }}{{ geocoding.admin1 ? `, ${geocoding.admin1}` : "" }}</h1>
-            <h2 class="current-weather__location-country">{{ geocoding.country }}</h2>
+            <h1 class="current-weather__location-name">
+                {{ geocoding.name }}{{ geocoding.admin1 ? `, ${geocoding.admin1}` : "" }}
+            </h1>
+            <h2 class="current-weather__location-country">
+                {{ geocoding.country }}
+            </h2>
         </div>
         <div
             class="current-weather__weather-container"
@@ -77,7 +81,7 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             text-align: center;
 
             @media (max-width: 767px) {
-                margin-bottom: 8px;
+                margin-bottom: 0;
             };
 
             &-name {
@@ -112,13 +116,17 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         &__conditions,
         &__data {
             box-sizing: content-box;
+            padding: 16px 0;
+
+            @media (max-width: 767px) {
+                padding: 8px 0;
+            }
         }
 
         &__conditions {
             flex-direction: column;
             align-items: center;
 
-            padding: 1rem 0;
             padding-left: 80px;
 
             @media (max-width: 767px) {
@@ -177,7 +185,6 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
             justify-content: center;
 
             height: 60%;
-            padding: 1rem 0;
             
             text-wrap: nowrap;
 
