@@ -98,12 +98,13 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
         }
 
         &__weather-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-direction: column;
 
-            @media (max-width: 767px) {
-                display: flex;
-                flex-direction: column;
+            @media (min-width: 768px) {
+                display: grid;
+                height: 92px;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
