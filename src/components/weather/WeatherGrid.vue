@@ -6,36 +6,33 @@ import GridContainer from '@/components/grid/GridContainer.vue';
 import HumidityCard from '@/components/weather/HumidityCard.vue';
 import PressureCard from '@/components/weather/PressureCard.vue';
 import WindCard from '@/components/weather/WindCard.vue';
-import CardItem from '../CardItem.vue';
+import AQICard from '@/components/weather/AQICard.vue';
+import CardItem from '@/components/CardItem.vue';
 
 const weatherStore = useWeatherStore();
 
 const { weather } = storeToRefs(weatherStore);
 </script>
 
-<!-- the CardItems are just placeholders, which will be populated in the future -->
-
 <template>
     <GridContainer class="weather-grid">
         <WindCard
-            class="weather-grid__grid-item"
             :direction="weather.current.wind_direction_10m"
             :speed="weather.current.wind_speed_10m"
             :unit="weather.current_units.wind_speed_10m"
         />
         <PressureCard
-            class="weather-grid__grid-item"
             :pressure="weather.current.surface_pressure"
         />
         <HumidityCard
-            class="weather-grid__grid-item"
             :humidity="weather.current.relative_humidity_2m"
         />
+        <AQICard
+            :aqi="weather.aqi"
+        />
         <CardItem
-            class="weather-grid__grid-item"
+            class="weather-grid__placeholder-item"
             header=""
-            :square="true"
-            :hollow="true"
         />
     </GridContainer>
 </template>
@@ -45,27 +42,16 @@ const { weather } = storeToRefs(weatherStore);
         margin-bottom: 16px;
         width: 960px;
 
-        &__grid-item {
-            grid-row: 1;
-
-            &:nth-child(even) {
-                grid-row: 2;
-            }
+        &__placeholder-item {
+            display: none !important;
 
             @media (min-width: 576px) {
-                &:nth-child(even) {
-                    grid-row: unset;
-                }
-
-                &:nth-child(4) {
-                    display: none; // temporary
-                }
+                display: unset !important;
+                grid-column: 2 / span 2;
             }
 
             @media (min-width: 1024px) {
-                &:nth-child(4) {
-                    display: unset;
-                }
+               display: none !important;
             }
         }
     }

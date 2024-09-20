@@ -76,13 +76,25 @@ export const useWeatherStore = defineStore('weather', () => {
       `&timezone=auto` +
       `&forecast_days=14` + 
       `&forecast_hours=24`;
+    
+      const aqiUrl = `https://air-quality-api.open-meteo.com/v1/air-quality` +
+        `?latitude=${latitude}` +
+        `&longitude=${longitude}` +
+        `&current=us_aqi`;
 
     axios
       .get(requestUrl)
       .then((res) => {
-        console.log(requestUrl);
         weather.value = res.data;
         weatherConditions.value = parseWeatherCode({ code: res.data.current.weather_code, isDay: res.data.current.is_day });
+      })
+      .then(() => {
+        axios
+          .get(aqiUrl)
+          .then((res) => {
+              weather.value.aqi = res.data.current.us_aqi;
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => {
         console.log(err);
