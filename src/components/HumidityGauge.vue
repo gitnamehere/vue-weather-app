@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{progress: string}>();
+defineProps<{ progress: string }>();
 </script>
 
 <template>
@@ -9,20 +9,20 @@ defineProps<{progress: string}>();
 </template>
 
 <style lang="scss">
-    .raindrop {
-        display: flex;
-        background-color: #FFF2;
-        mask-size: 100% 100%;
-        mask-repeat: no-repeat;
-        mask-image: url("@/assets/weather-icons/svg/wi-raindrop.svg");
+.raindrop {
+    display: flex;
+    background-color: #fff2;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-image: url("@/assets/weather-icons/svg/wi-raindrop.svg");
 
-        &__water {
-            margin-top: auto;
-            height: v-bind(progress);
-            width: 100%;
-            background-color: #FFF;
+    &__water {
+        margin-top: auto;
+        height: v-bind(progress);
+        width: 100%;
+        background-color: #fff;
 
-            transition: height 0.5s ease;
-        }
+        transition: height 0.5s ease;
     }
+}
 </style>
