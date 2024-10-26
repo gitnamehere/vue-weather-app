@@ -4,16 +4,14 @@ import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 
 import { useWeatherStore } from '@/stores/weather';
-import { TemperatureUnits } from '@/utils/constants';
-
-import Searchbar from '@/components/LocationSearchbar.vue';
 import CurrentWeather from '@/components/weather/CurrentWeather.vue';
 import DailyWeather from '@/components/weather/DailyWeather.vue';
 import HourlyWeather from '@/components/weather/HourlyWeather.vue';
 import WeatherGrid from '@/components/weather/WeatherGrid.vue';
+import WeatherNavbar from '@/components/WeatherNavbar.vue';
 
 const weatherStore = useWeatherStore();
-const { error, temperatureUnit, weather } = storeToRefs(weatherStore);
+const { error, weather } = storeToRefs(weatherStore);
 
 const route = useRoute();
 
@@ -40,21 +38,7 @@ onMounted(() => {
         class="weather"
         :class="weather?.current?.is_day ? 'weather--day' : 'weather--night'"
     >
-        <div
-            class="weather__top-bar"
-            :class="{ 'weather__top-bar--day': weather?.current?.is_day }"
-        >
-            <a href="/">
-                <h1>A Vue Weather App</h1>
-            </a>
-            <Searchbar class="weather__search-bar" />
-            <button
-                class="weather__menu-button"
-                @click="weatherStore.toggleTemperatureUnit"
-            >
-                {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? 'F' : 'C' }}
-            </button>
-        </div>
+        <WeatherNavbar />
         <div
             v-if="weather?.current"
             class="weather__container"
@@ -82,7 +66,7 @@ onMounted(() => {
             </h1>
         </div>
         <footer class="weather__footer">
-            <p>This is the weather page. (under development)</p>
+            <p>Under development</p>
             <a href="https://open-meteo.com/">
                 <u>Weather data by Open-Meteo.com</u>
             </a>
@@ -109,60 +93,6 @@ onMounted(() => {
 
         @media (min-width: 768px) {
             padding-top: 96px;
-        }
-
-        &__search-bar {
-            width: 100%;
-
-            @media (min-width: 768px) {
-                flex-grow: 1;
-                width: unset;
-                margin-left: 16px;
-            }
-        }
-
-
-        &__top-bar {
-            display: flex;
-            position: fixed;
-            inset: 0;
-            flex-direction: row;
-            align-items: center;
-
-            margin-bottom: 2rem;
-            height: 72px;
-            padding: 8px 64px;
-
-            background: linear-gradient(#1d104b, transparent);
-
-            animation: all 0.5s ease;
-
-            &--day {
-                background: linear-gradient(#89c6ff, #2885dd, transparent);
-            }
-
-            @media (max-width: 767px) {
-                padding: 16px;
-
-                h1 {
-                    display: none;
-                }
-            }
-
-            h1 {
-                font-weight: 500;
-                font-size: 24px;
-                color: #f8f8f8;
-            }
-        }
-
-        &__menu-button {
-            margin-left: 16px;
-
-            height: 40px;
-            width: 40px;
-            border-radius: 16px;
-            border: none;
         }
 
         &__container {
