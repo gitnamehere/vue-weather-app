@@ -27,9 +27,7 @@ function getRouteFromParams() {
 
 onMounted(() => {
     window.scrollTo(0, 0); // scroll to top when page is loaded, fixes page loading somewhere in the middle of the page on mobile devices
-
     getRouteFromParams();
-    console.log(window.innerWidth);
 })
 </script>
 
