@@ -1,10 +1,9 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import axios from "axios";
 
+import * as openMeteoService from "@/services/openMeteoWeatherService";
 import { parseWeatherCode, type WeatherConditions } from "@/utils/weatherCodes";
-
-import { API_URL, GEOCODING_API_URL, TemperatureUnits } from "@/utils/constants";
+import { TemperatureUnits } from "@/utils/constants";
 
 // create weather store with setup syntax
 export const useWeatherStore = defineStore("weather", () => {
@@ -27,33 +26,31 @@ export const useWeatherStore = defineStore("weather", () => {
     if (weather.value) fetchWeatherData(latitude.value, longitude.value);
   };
 
-  const getLocations = (locationSearch: string) => {
-    axios
-      .get(`${GEOCODING_API_URL}search?name=${locationSearch}&count=10&language=en&format=json`)
-      .then((res) => {
-        locations.value = res.data.results;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getLocations = async (locationSearchString: string) => {
+    try {
+      locations.value = await openMeteoService.getLocations(locationSearchString, 10);
+    } catch (err) {
+      console.log(err)
+    }
   };
 
-  const getWeatherByName = (location: string) => {
-    error.value = false;
-    axios
-      .get(`${GEOCODING_API_URL}search?name=${location}&count=1&language=en&format=json`)
-      .then((res) => {
-        longitude.value = res.data.results[0].longitude;
-        latitude.value = res.data.results[0].latitude;
-        geocoding.value = res.data.results[0];
+  const getWeatherByName = async (locationSearchString: string) => {
+    try {
+      const location = await openMeteoService.getLocations(locationSearchString, 1);
+
+      if (location.length) {
+        longitude.value = location[0].longitude;
+        latitude.value = location[0].latitude;
+        geocoding.value = location[0];
         fetchWeatherData(latitude.value, longitude.value);
-      })
-      .catch((err) => {
-        console.log(err);
+      } else {
         geocoding.value = {};
         weather.value = {};
-        error.value = true;
-      });
+      }
+    } catch (err) {
+      console.log(err)
+      error.value = true;
+    }
   };
 
   const getWeatherFromGeocoding = (location: any) => {
@@ -64,48 +61,17 @@ export const useWeatherStore = defineStore("weather", () => {
     fetchWeatherData(latitude.value, longitude.value);
   };
 
-  const fetchWeatherData = (latitude: number, longitude: number) => {
-    const requestUrl =
-      `${API_URL}forecast` +
-      `?latitude=${latitude}` +
-      `&longitude=${longitude}` +
-      `&current=temperature_2m,apparent_temperature,relative_humidity_2m,surface_pressure,is_day,weather_code,wind_speed_10m,wind_direction_10m` +
-      `&hourly=temperature_2m,weather_code,is_day` +
-      `&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
-      `&temperature_unit=${temperatureUnit.value}` +
-      `&wind_speed_unit=mph` +
-      `&precipitation_unit=inch` +
-      `&timezone=auto` +
-      `&forecast_days=14` +
-      `&forecast_hours=24`;
-
-    const aqiUrl =
-      `https://air-quality-api.open-meteo.com/v1/air-quality` +
-      `?latitude=${latitude}` +
-      `&longitude=${longitude}` +
-      `&current=us_aqi`;
-
-    axios
-      .get(requestUrl)
-      .then((res) => {
-        weather.value = res.data;
-        weatherConditions.value = parseWeatherCode({
-          code: res.data.current.weather_code,
-          isDay: res.data.current.is_day
-        });
+  const fetchWeatherData = async (latitude: number, longitude: number) => {
+    try {
+      weather.value = await openMeteoService.fetchWeatherData(latitude, longitude, temperatureUnit.value)
+      weatherConditions.value = parseWeatherCode({
+        code: weather.value.current.weather_code,
+        isDay: weather.value.current.is_day
       })
-      .then(() => {
-        axios
-          .get(aqiUrl)
-          .then((res) => {
-            weather.value.aqi = res.data.current.us_aqi;
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => {
-        console.log(err);
-        error.value = true;
-      });
+    } catch (err) {
+      console.log(err);
+      error.value = true;
+    }
   };
 
   return {
