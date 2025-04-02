@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { useWeatherStore } from "@/stores/weather";
 import { parseWeatherCode } from "@/utils/weatherCodes";
 
-import CardItem from "@/components/CardItem.vue";
+import CardItem from "@/components/core/CardItem.vue";
 
 const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

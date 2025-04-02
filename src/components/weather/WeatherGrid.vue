@@ -3,11 +3,11 @@ import { storeToRefs } from "pinia";
 import { useWeatherStore } from "@/stores/weather";
 
 import GridContainer from "@/components/grid/GridContainer.vue";
-import HumidityCard from "@/components/weather/HumidityCard.vue";
-import PressureCard from "@/components/weather/PressureCard.vue";
-import WindCard from "@/components/weather/WindCard.vue";
-import AQICard from "@/components/weather/AQICard.vue";
-import CardItem from "@/components/CardItem.vue";
+import HumidityCard from "@/components/weather/cards/HumidityCard.vue";
+import PressureCard from "@/components/weather/cards/PressureCard.vue";
+import WindCard from "@/components/weather/cards/WindCard.vue";
+import AQICard from "@/components/weather/cards/AQICard.vue";
+import CardItem from "@/components/core/CardItem.vue";
 
 const weatherStore = useWeatherStore();
 

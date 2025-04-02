@@ -21,7 +21,7 @@ const getLocations = () => {
   }, 500);
 };
 
-const getWeather = () => {
+const getWeatherBySearch = () => {
   if (!location.value) return;
 
   clearTimeout(timer);
@@ -35,9 +35,9 @@ const getWeather = () => {
   });
 };
 
-const getWeatherByCoords = (location: any) => {
+const getWeatherByLocation = (location: any) => {
   locationsSearched.value = false;
-  weatherStore.getWeatherFromGeocoding(location);
+  weatherStore.getWeatherByGeocoding(location);
   router.push({
     name: "weather",
     params: {
@@ -55,7 +55,7 @@ const getWeatherByCoords = (location: any) => {
         class="location-searchbar__input"
         placeholder="Enter a city or zip code"
         @keyup.stop="getLocations"
-        @keyup.enter="getWeather"
+        @keyup.enter="getWeatherBySearch"
       >
       <button
         class="location-searchbar__button"
@@ -64,7 +64,7 @@ const getWeatherByCoords = (location: any) => {
             ? 'location-searchbar__button--day'
             : 'location-searchbar__button--night'
         ]"
-        @click="getWeather"
+        @click="getWeatherBySearch"
       >
         <font-awesome-icon
           :icon="['fas', 'magnifying-glass']"
@@ -80,7 +80,7 @@ const getWeatherByCoords = (location: any) => {
         v-for="locationName in locations"
         :key="locationName"
         class="location-searchbar__list-item"
-        @click="getWeatherByCoords(locationName)"
+        @click="getWeatherByLocation(locationName)"
       >
         <p>{{ locationName.name }}, {{ locationName.admin1 }}</p>
       </div>

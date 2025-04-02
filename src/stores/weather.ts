@@ -8,8 +8,8 @@ import { TemperatureUnits } from "@/utils/constants";
 // create weather store with setup syntax
 export const useWeatherStore = defineStore("weather", () => {
   // state
-  const longitude = ref();
   const latitude = ref();
+  const longitude = ref();
   const temperatureUnit = ref<TemperatureUnits>(TemperatureUnits.FAHRENHEIT);
   const geocoding = ref();
   const weather = ref();
@@ -39,8 +39,8 @@ export const useWeatherStore = defineStore("weather", () => {
       const location = await openMeteoService.getLocations(locationSearchString, 1);
 
       if (location.length) {
-        longitude.value = location[0].longitude;
         latitude.value = location[0].latitude;
+        longitude.value = location[0].longitude;
         geocoding.value = location[0];
         fetchWeatherData(latitude.value, longitude.value);
       } else {
@@ -53,10 +53,10 @@ export const useWeatherStore = defineStore("weather", () => {
     }
   };
 
-  const getWeatherFromGeocoding = (location: any) => {
+  const getWeatherByGeocoding = (location: any) => {
     error.value = false;
-    longitude.value = location.longitude;
     latitude.value = location.latitude;
+    longitude.value = location.longitude;
     geocoding.value = location;
     fetchWeatherData(latitude.value, longitude.value);
   };
@@ -89,7 +89,7 @@ export const useWeatherStore = defineStore("weather", () => {
     weatherConditions,
     toggleTemperatureUnit,
     getWeatherByName,
-    getWeatherFromGeocoding,
+    getWeatherByGeocoding,
     getLocations,
     fetchWeatherData,
     error

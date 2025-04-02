@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import CardItem from "@/components/CardItem.vue";
+import CardItem from "@/components/core/CardItem.vue";
 
 interface Props {
-  pressure: number;
+  direction: number;
+  speed: number;
+  unit: string;
 }
 
 defineProps<Props>();
@@ -10,20 +12,20 @@ defineProps<Props>();
 
 <template>
   <CardItem
-    class="pressure-card"
-    header="Pressure (WIP)"
+    class="wind-card"
+    header="Wind (WIP)"
     :square="true"
   >
-    <div class="pressure-card__body">
-      <h2 class="pressure-card__indicator">
-        {{ pressure }}hpa
+    <div class="wind-card__body">
+      <h2 class="wind-card__indicator">
+        {{ speed }}mph {{ direction }}°
       </h2>
     </div>
   </CardItem>
 </template>
 
 <style lang="scss">
-.pressure-card {
+.wind-card {
   &__body {
     display: flex;
     justify-content: center;

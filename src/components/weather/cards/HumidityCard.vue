@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CardItem from "@/components/CardItem.vue";
-import HumidityGauge from "@/components/HumidityGauge.vue";
+import CardItem from "@/components/core/CardItem.vue";
+import HumidityGauge from "@/components/core/HumidityGauge.vue";
 
 defineProps<{
   humidity: number;

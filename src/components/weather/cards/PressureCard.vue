@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import CardItem from "@/components/CardItem.vue";
+import CardItem from "@/components/core/CardItem.vue";
 
 interface Props {
-  aqi: number;
+  pressure: number;
 }
 
 defineProps<Props>();
@@ -10,20 +10,20 @@ defineProps<Props>();
 
 <template>
   <CardItem
-    class="aqi-card"
-    header="AQI (WIP)"
+    class="pressure-card"
+    header="Pressure (WIP)"
     :square="true"
   >
-    <div class="aqi-card__body">
-      <h2 class="aqi-card__indicator">
-        {{ aqi }}
+    <div class="pressure-card__body">
+      <h2 class="pressure-card__indicator">
+        {{ pressure }}hpa
       </h2>
     </div>
   </CardItem>
 </template>
 
 <style lang="scss">
-.aqi-card {
+.pressure-card {
   &__body {
     display: flex;
     justify-content: center;
