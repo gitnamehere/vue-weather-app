@@ -10,13 +10,19 @@ const { temperatureUnit, weather } = storeToRefs(weatherStore);
 </script>
 
 <template>
-  <div class="navbar" :class="{ 'navbar--day': weather?.current?.is_day }">
+  <div
+    class="navbar"
+    :class="{ 'navbar--day': weather?.current?.is_day }"
+  >
     <div class="navbar__content">
       <a href="/">
         <h1 class="navbar__content-title">A Vue Weather App</h1>
       </a>
       <Searchbar class="navbar__search-bar" />
-      <button class="navbar__menu-button" @click="weatherStore.toggleTemperatureUnit">
+      <button
+        class="navbar__menu-button"
+        @click="weatherStore.toggleTemperatureUnit"
+      >
         {{ temperatureUnit === TemperatureUnits.FAHRENHEIT ? "F" : "C" }}
       </button>
     </div>

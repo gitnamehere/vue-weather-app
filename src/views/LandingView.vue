@@ -4,7 +4,9 @@ import Searchbar from "@/components/LocationSearchbar.vue";
 
 <template>
   <div class="landing">
-    <h1 class="landing__title">A Vue Weather App</h1>
+    <h1 class="landing__title">
+      A Vue Weather App
+    </h1>
     <Searchbar class="landing__search-bar" />
     <div class="landing__api-link">
       <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>

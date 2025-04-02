@@ -23,7 +23,11 @@ function toggleCollapsed() {
   >
     <div class="card__header">
       <h3>{{ header }}</h3>
-      <div v-if="collapsible" class="card__header-button" @click="toggleCollapsed">
+      <div
+        v-if="collapsible"
+        class="card__header-button"
+        @click="toggleCollapsed"
+      >
         {{ collapsed ? "+" : "-" }}
       </div>
     </div>

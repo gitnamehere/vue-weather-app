@@ -11,7 +11,4 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   },
-  rules: {
-    "vue/html-indent": [1, 4]
-  }
 }

@@ -7,7 +7,10 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
 </script>
 
 <template>
-  <div v-if="weather?.current" class="current-weather">
+  <div
+    v-if="weather?.current"
+    class="current-weather"
+  >
     <div class="current-weather__location">
       <h1 class="current-weather__location-name">
         {{ geocoding.name }}{{ geocoding.admin1 ? `, ${geocoding.admin1}` : "" }}
@@ -34,7 +37,10 @@ const { weather, geocoding, weatherConditions } = storeToRefs(weatherStore);
           {{ weather.daily_units.temperature_2m_min }}
         </p>
       </div>
-      <div v-if="weather.daily" class="current-weather__data">
+      <div
+        v-if="weather.daily"
+        class="current-weather__data"
+      >
         <p class="current-weather__data-text">
           H:
           {{ `${weather.daily.temperature_2m_max[0]}${weather.daily_units.temperature_2m_max}` }}

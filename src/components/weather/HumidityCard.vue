@@ -8,10 +8,19 @@ defineProps<{
 </script>
 
 <template>
-  <CardItem class="humidity-card" header="Humidity" :square="true">
+  <CardItem
+    class="humidity-card"
+    header="Humidity"
+    :square="true"
+  >
     <div class="humidity-card__body">
-      <HumidityGauge class="humidity-card__raindrop" :progress="`${humidity}%`" />
-      <h2 class="humidity-card__indicator">{{ humidity }}%</h2>
+      <HumidityGauge
+        class="humidity-card__raindrop"
+        :progress="`${humidity}%`"
+      />
+      <h2 class="humidity-card__indicator">
+        {{ humidity }}%
+      </h2>
     </div>
   </CardItem>
 </template>

@@ -32,21 +32,34 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="weather" :class="weather?.current?.is_day ? 'weather--day' : 'weather--night'">
+  <div
+    class="weather"
+    :class="weather?.current?.is_day ? 'weather--day' : 'weather--night'"
+  >
     <WeatherNavbar />
-    <div v-if="weather?.current" class="weather__container">
+    <div
+      v-if="weather?.current"
+      class="weather__container"
+    >
       <CurrentWeather />
       <HourlyWeather />
       <WeatherGrid />
       <DailyWeather />
     </div>
-    <div v-else class="weather__container">
+    <div
+      v-else
+      class="weather__container"
+    >
       <template v-if="error">
         <h1>Cannot fetch weather data</h1>
         <p>The location you searched for doesn't exist, or an error occured</p>
       </template>
-      <h1 v-else-if="route.params.location">Loading...</h1>
-      <h1 v-else>Enter in a location to get weather data</h1>
+      <h1 v-else-if="route.params.location">
+        Loading...
+      </h1>
+      <h1 v-else>
+        Enter in a location to get weather data
+      </h1>
     </div>
     <footer class="weather__footer">
       <p>Under development</p>

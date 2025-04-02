@@ -34,11 +34,18 @@ const hourlyWeather = computed(() => {
     class="hourly-weather__container"
   >
     <div class="hourly-weather__list">
-      <div v-for="(hour, i) in hourlyWeather" :key="i" class="hourly-weather__list-item">
+      <div
+        v-for="(hour, i) in hourlyWeather"
+        :key="i"
+        class="hourly-weather__list-item"
+      >
         <p class="hourly-weather__text">
           {{ i == 0 ? "Now" : `${hour.time}` }}
         </p>
-        <i class="hourly-weather__icon wi" :class="hour.icon" />
+        <i
+          class="hourly-weather__icon wi"
+          :class="hour.icon"
+        />
         <div>
           <p class="hourly-weather__text">
             {{ `${hour.temperature}°` }}

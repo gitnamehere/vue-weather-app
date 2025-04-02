@@ -56,7 +56,7 @@ const getWeatherByCoords = (location: any) => {
         placeholder="Enter a city or zip code"
         @keyup.stop="getLocations"
         @keyup.enter="getWeather"
-      />
+      >
       <button
         class="location-searchbar__button"
         :class="[
@@ -66,10 +66,16 @@ const getWeatherByCoords = (location: any) => {
         ]"
         @click="getWeather"
       >
-        <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" />
+        <font-awesome-icon
+          :icon="['fas', 'magnifying-glass']"
+          size="xl"
+        />
       </button>
     </div>
-    <div v-if="locationsSearched" class="location-searchbar__list">
+    <div
+      v-if="locationsSearched"
+      class="location-searchbar__list"
+    >
       <div
         v-for="locationName in locations"
         :key="locationName"

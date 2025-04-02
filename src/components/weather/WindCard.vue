@@ -11,9 +11,15 @@ defineProps<Props>();
 </script>
 
 <template>
-  <CardItem class="wind-card" header="Wind (WIP)" :square="true">
+  <CardItem
+    class="wind-card"
+    header="Wind (WIP)"
+    :square="true"
+  >
     <div class="wind-card__body">
-      <h2 class="wind-card__indicator">{{ speed }}mph {{ direction }}°</h2>
+      <h2 class="wind-card__indicator">
+        {{ speed }}mph {{ direction }}°
+      </h2>
     </div>
   </CardItem>
 </template>

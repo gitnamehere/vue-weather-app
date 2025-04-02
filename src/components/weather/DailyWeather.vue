@@ -38,11 +38,18 @@ const dailyWeather = computed(() => {
     class="daily-weather__container"
   >
     <div class="daily-weather__list">
-      <div v-for="(day, i) in dailyWeather" :key="i" class="daily-weather__list-item">
+      <div
+        v-for="(day, i) in dailyWeather"
+        :key="i"
+        class="daily-weather__list-item"
+      >
         <p class="daily-weather__text">
           {{ i == 0 ? "Today" : day.day }}
         </p>
-        <i class="daily-weather__icon wi" :class="day.icon" />
+        <i
+          class="daily-weather__icon wi"
+          :class="day.icon"
+        />
         <div>
           <p class="daily-weather__text">
             {{ `${day.minTemperature}° - ${day.maxTemperature}°` }}
