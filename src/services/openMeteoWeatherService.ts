@@ -8,9 +8,9 @@ export const getLocations = async (locationName: string, count: number): Promise
     .get(`${GEOCODING_API_URL}search?name=${locationName}&count=${count}&language=en&format=json`)
     .then((res) => {
       if (res.data.results) {
-        return locations = res.data.results;
+        return (locations = res.data.results);
       }
-      return locations = [];
+      return (locations = []);
     })
     .catch((err) => {
       console.log(err);
@@ -18,9 +18,13 @@ export const getLocations = async (locationName: string, count: number): Promise
     });
 
   return locations;
-}
+};
 
-export const fetchWeatherData = async (latitude: number, longitude: number, temperatureUnit: TemperatureUnits) => {
+export const fetchWeatherData = async (
+  latitude: number,
+  longitude: number,
+  temperatureUnit: TemperatureUnits
+) => {
   const requestUrl =
     `${API_URL}forecast` +
     `?latitude=${latitude}` +
@@ -45,19 +49,19 @@ export const fetchWeatherData = async (latitude: number, longitude: number, temp
 
   await axios
     .get(requestUrl)
-    .then(res => weather = res.data)
-    .catch(err => {
-      console.log(err)
-      throw err
+    .then((res) => (weather = res.data))
+    .catch((err) => {
+      console.log(err);
+      throw err;
     });
   await axios
     .get(aqiUrl)
-    .then(res => aqi = res.data.current.us_aqi)
-    .catch(err => {
-      console.log(err)
+    .then((res) => (aqi = res.data.current.us_aqi))
+    .catch((err) => {
+      console.log(err);
     });
-  
+
   if (aqi) Object.assign(weather, { aqi });
 
   return weather;
-}
+};

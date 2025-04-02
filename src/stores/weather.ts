@@ -30,7 +30,7 @@ export const useWeatherStore = defineStore("weather", () => {
     try {
       locations.value = await openMeteoService.getLocations(locationSearchString, 10);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -48,7 +48,7 @@ export const useWeatherStore = defineStore("weather", () => {
         weather.value = {};
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       error.value = true;
     }
   };
@@ -63,11 +63,15 @@ export const useWeatherStore = defineStore("weather", () => {
 
   const fetchWeatherData = async (latitude: number, longitude: number) => {
     try {
-      weather.value = await openMeteoService.fetchWeatherData(latitude, longitude, temperatureUnit.value)
+      weather.value = await openMeteoService.fetchWeatherData(
+        latitude,
+        longitude,
+        temperatureUnit.value
+      );
       weatherConditions.value = parseWeatherCode({
         code: weather.value.current.weather_code,
         isDay: weather.value.current.is_day
-      })
+      });
     } catch (err) {
       console.log(err);
       error.value = true;

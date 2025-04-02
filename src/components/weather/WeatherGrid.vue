@@ -23,7 +23,7 @@ const { weather } = storeToRefs(weatherStore);
     />
     <PressureCard :pressure="weather.current.surface_pressure" />
     <HumidityCard :humidity="weather.current.relative_humidity_2m" />
-    <AQICard 
+    <AQICard
       v-if="weather.aqi"
       :aqi="weather.aqi"
     />
