@@ -23,14 +23,8 @@ const { weather } = storeToRefs(weatherStore);
     />
     <PressureCard :pressure="weather.current.surface_pressure" />
     <HumidityCard :humidity="weather.current.relative_humidity_2m" />
-    <AQICard
-      v-if="weather.aqi"
-      :aqi="weather.aqi"
-    />
-    <CardItem
-      class="weather-grid__placeholder-item"
-      header=""
-    />
+    <AQICard v-if="weather.aqi" :aqi="weather.aqi" />
+    <CardItem class="weather-grid__placeholder-item" header="" />
   </GridContainer>
 </template>
 

@@ -9,11 +9,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <CardItem
-    class="aqi-card"
-    header="AQI (WIP)"
-    :square="true"
-  >
+  <CardItem class="aqi-card" header="AQI (WIP)" :square="true">
     <div class="aqi-card__body">
       <h2 class="aqi-card__indicator">
         {{ aqi }}

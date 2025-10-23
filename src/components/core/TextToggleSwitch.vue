@@ -9,25 +9,13 @@ const emit = defineEmits(["toggle"]);
 </script>
 
 <template>
-  <button
-    class="toggle"
-    @click="emit('toggle')"
-  >
-    <div
-      class="toggle__switch"
-      :class="{'toggle__switch--active' : isOn}"
-    />
+  <button class="toggle" @click="emit('toggle')">
+    <div class="toggle__switch" :class="{ 'toggle__switch--active': isOn }" />
     <div class="toggle__body">
-      <div
-        class="toggle__left"
-        :class="{'toggle__left--active' : !isOn}"
-      >
+      <div class="toggle__left" :class="{ 'toggle__left--active': !isOn }">
         {{ leftText }}
       </div>
-      <div
-        class="toggle__right"
-        :class="{'toggle__right--active' : isOn}"
-      >
+      <div class="toggle__right" :class="{ 'toggle__right--active': isOn }">
         {{ rightText }}
       </div>
     </div>

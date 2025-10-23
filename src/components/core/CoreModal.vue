@@ -1,25 +1,22 @@
 <script setup lang="ts">
-import { useCoreStore } from '@/stores/core';
-import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { useCoreStore } from "@/stores/core";
+import { storeToRefs } from "pinia";
+import { watch } from "vue";
 
 const store = useCoreStore();
 const { modalActive } = storeToRefs(store);
 
 watch(modalActive, () => {
   modalActive.value
-    ? document.body.style.overflow = "hidden"
-    : document.body.style.removeProperty("overflow")
+    ? (document.body.style.overflow = "hidden")
+    : document.body.style.removeProperty("overflow");
 });
 </script>
 
 <template>
   <Teleport to="body">
     <Transition>
-      <div 
-        v-show="modalActive"
-        class="core-modal"
-      >
+      <div v-show="modalActive" class="core-modal">
         <slot />
       </div>
     </Transition>

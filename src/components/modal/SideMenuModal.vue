@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useCoreStore } from '@/stores/core';
-import { useWeatherStore } from '@/stores/weather';
-import { onMounted, ref, watch } from 'vue';
-import CoreModal from '@/components/core/CoreModal.vue';
-import TextToggleSwitch from '@/components/core/TextToggleSwitch.vue';
-import { TemperatureUnits, WindSpeedUnits } from '@/utils/constants';
+import { storeToRefs } from "pinia";
+import { useCoreStore } from "@/stores/core";
+import { useWeatherStore } from "@/stores/weather";
+import { onMounted, ref, watch } from "vue";
+import CoreModal from "@/components/core/CoreModal.vue";
+import TextToggleSwitch from "@/components/core/TextToggleSwitch.vue";
+import { TemperatureUnits, WindSpeedUnits } from "@/utils/constants";
 
 const { openModal, closeModal } = useCoreStore();
 const weatherStore = useWeatherStore();
@@ -27,8 +27,8 @@ function close() {
   isOpen.value = false;
   closeModal();
   setTimeout(() => {
-    emit('close');
-  }, 350)
+    emit("close");
+  }, 350);
 }
 
 watch(windSpeedModel, () => weatherStore.setWindSpeedUnit(windSpeedModel.value));
@@ -36,7 +36,7 @@ watch(windSpeedModel, () => weatherStore.setWindSpeedUnit(windSpeedModel.value))
 onMounted(() => {
   isOpen.value = true;
   openModal();
-})
+});
 </script>
 
 <template>
@@ -45,18 +45,12 @@ onMounted(() => {
       <div
         v-if="isOpen"
         class="side-menu-modal"
-        :class="{'side-menu-modal--glass' : menuStyle === 'glass'}"
+        :class="{ 'side-menu-modal--glass': menuStyle === 'glass' }"
       >
         <div class="side-menu-modal__head">
           <span class="side-menu-modal__title">Settings</span>
-          <button
-            class="side-menu-modal__close-button"
-            @click="close"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'xmark']"
-              size="xl"
-            />
+          <button class="side-menu-modal__close-button" @click="close">
+            <font-awesome-icon :icon="['fas', 'xmark']" size="xl" />
           </button>
         </div>
         <div class="side-menu-modal__body">
@@ -143,7 +137,7 @@ onMounted(() => {
     border: none;
     border-radius: 16px;
 
-    color: #FFF;
+    color: #fff;
     background-color: #3387;
 
     aspect-ratio: 1;
@@ -151,7 +145,7 @@ onMounted(() => {
     transition: 0.25s ease;
 
     &:hover {
-      background-color: #FFF;
+      background-color: #fff;
       color: #1d104b;
     }
   }

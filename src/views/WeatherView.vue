@@ -38,50 +38,28 @@ onMounted(() => {
 });
 
 watch(isDay, () => {
-  document.body.style.backgroundColor = isDay.value
-    ? "#2885dd"
-    : "#111128";
+  document.body.style.backgroundColor = isDay.value ? "#2885dd" : "#111128";
 });
 </script>
 
 <template>
-  <div
-    class="weather"
-    :class="isDay ? 'weather--day' : 'weather--night'"
-  >
-    <WeatherNavbar
-      :menu-open="menuOpen"
-      @menu-button="toggleMenu"
-    />
-    <div
-      v-if="weather?.current"
-      class="weather__container"
-    >
+  <div class="weather" :class="isDay ? 'weather--day' : 'weather--night'">
+    <WeatherNavbar :menu-open="menuOpen" @menu-button="toggleMenu" />
+    <div v-if="weather?.current" class="weather__container">
       <CurrentWeather />
       <HourlyWeather />
       <WeatherGrid />
       <DailyWeather />
     </div>
-    <div
-      v-else
-      class="weather__container"
-    >
+    <div v-else class="weather__container">
       <template v-if="error">
         <h1>Cannot fetch weather data</h1>
         <p>The location you searched for doesn't exist, or an error occured</p>
       </template>
-      <h1 v-else-if="route.params.location">
-        Loading...
-      </h1>
-      <h1 v-else>
-        Enter in a location to get weather data
-      </h1>
+      <h1 v-else-if="route.params.location">Loading...</h1>
+      <h1 v-else>Enter in a location to get weather data</h1>
     </div>
-    <SideMenuModal
-      v-if="menuOpen"
-      menu-style="glass"
-      @close="toggleMenu"
-    />
+    <SideMenuModal v-if="menuOpen" menu-style="glass" @close="toggleMenu" />
     <footer class="weather__footer">
       <p>Under development</p>
       <a href="https://open-meteo.com/">

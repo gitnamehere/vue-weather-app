@@ -8,17 +8,14 @@ const weatherStore = useWeatherStore();
 const { weather } = storeToRefs(weatherStore);
 
 defineProps<{
-  menuOpen: boolean
+  menuOpen: boolean;
 }>();
 
 defineEmits(["menuButton"]);
 </script>
 
 <template>
-  <div
-    class="navbar"
-    :class="{ 'navbar--day': weather?.current?.is_day }"
-  >
+  <div class="navbar" :class="{ 'navbar--day': weather?.current?.is_day }">
     <div class="navbar__content">
       <a href="/">
         <h1 class="navbar__content-title">A Vue Weather App</h1>
@@ -26,16 +23,13 @@ defineEmits(["menuButton"]);
       <Searchbar class="navbar__search-bar" list-offset="16px" />
       <button
         class="navbar__menu-button"
-        :class="{ 
-          'navbar__menu-button--day' : weather?.current?.is_day,
-          'navbar__menu-button--active' : menuOpen
+        :class="{
+          'navbar__menu-button--day': weather?.current?.is_day,
+          'navbar__menu-button--active': menuOpen
         }"
         @click="$emit('menuButton')"
       >
-        <font-awesome-icon
-          :icon="['fas', 'gear']"
-          size="xl"
-        />
+        <font-awesome-icon :icon="['fas', 'gear']" size="xl" />
       </button>
     </div>
   </div>
@@ -102,7 +96,7 @@ defineEmits(["menuButton"]);
     border-radius: 16px;
     border: 1px solid #ccc;
 
-    color: #FFF;
+    color: #fff;
     background-color: #3382;
 
     aspect-ratio: 1;
@@ -110,12 +104,12 @@ defineEmits(["menuButton"]);
     transition: 0.25s ease;
 
     &:hover:not(&--active) {
-      background-color: #FFF;
+      background-color: #fff;
       color: #1d104b;
     }
 
     &--active {
-      background-color: #FFF;
+      background-color: #fff;
       color: #1d104b;
 
       &:hover {

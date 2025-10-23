@@ -23,11 +23,7 @@ function toggleCollapsed() {
   >
     <div class="card__header">
       <h3>{{ header }}</h3>
-      <div
-        v-if="collapsible"
-        class="card__header-button"
-        @click="toggleCollapsed"
-      >
+      <div v-if="collapsible" class="card__header-button" @click="toggleCollapsed">
         {{ collapsed ? "+" : "-" }}
       </div>
     </div>
@@ -93,12 +89,16 @@ function toggleCollapsed() {
 
   &__collapse {
     &-enter-active {
-      transition: max-height 0.25s ease, opacity 0.25s 0.25s ease;
+      transition:
+        max-height 0.25s ease,
+        opacity 0.25s 0.25s ease;
       overflow: hidden;
     }
 
     &-leave-active {
-      transition: max-height 0.25s 0.25s ease, opacity 0.25s ease;
+      transition:
+        max-height 0.25s 0.25s ease,
+        opacity 0.25s ease;
       overflow: hidden;
     }
 

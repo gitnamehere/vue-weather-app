@@ -32,7 +32,7 @@ export const useWeatherStore = defineStore("weather", () => {
     windSpeedUnit.value = unit;
 
     if (weather.value) fetchWeatherData(latitude.value, longitude.value);
-  }
+  };
 
   const getLocations = async (locationSearchString: string) => {
     try {
