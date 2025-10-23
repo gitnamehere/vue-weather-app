@@ -5,6 +5,10 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 const weatherStore = useWeatherStore();
 
+const props = defineProps<{
+  listOffset: string;
+}>();
+
 const location = ref("");
 const locationsSearched = ref(false);
 const { weather, locations } = storeToRefs(weatherStore);
@@ -33,7 +37,7 @@ const getWeatherBySearch = () => {
       location: location.value
     },
     query: {
-      searched: 'true',
+      searched: "true"
     }
   });
 };
@@ -47,7 +51,7 @@ const getWeatherByLocation = (location: any) => {
       location: location.name
     },
     query: {
-      searched: 'true',
+      searched: "true"
     }
   });
 };
@@ -62,7 +66,7 @@ const getWeatherByLocation = (location: any) => {
         placeholder="Enter a city or zip code"
         @keyup.stop="getLocations"
         @keyup.enter="getWeatherBySearch"
-      >
+      />
       <button
         class="location-searchbar__button"
         :class="[
@@ -72,16 +76,10 @@ const getWeatherByLocation = (location: any) => {
         ]"
         @click="getWeatherBySearch"
       >
-        <font-awesome-icon
-          :icon="['fas', 'magnifying-glass']"
-          size="xl"
-        />
+        <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" />
       </button>
     </div>
-    <div
-      v-if="locationsSearched"
-      class="location-searchbar__list"
-    >
+    <div v-if="locationsSearched" class="location-searchbar__list">
       <div
         v-for="locationName in locations"
         :key="locationName"
@@ -140,8 +138,8 @@ const getWeatherByLocation = (location: any) => {
   &__list {
     position: absolute;
 
-    margin-top: 16px;
-    border-radius: 8px;
+    margin-top: v-bind("props.listOffset");
+    border-radius: 16px;
 
     background-color: white;
     color: #000;

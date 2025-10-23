@@ -23,7 +23,7 @@ defineEmits(["menuButton"]);
       <a href="/">
         <h1 class="navbar__content-title">A Vue Weather App</h1>
       </a>
-      <Searchbar class="navbar__search-bar" />
+      <Searchbar class="navbar__search-bar" list-offset="16px" />
       <button
         class="navbar__menu-button"
         :class="{ 
